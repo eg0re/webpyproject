@@ -1,1 +1,9 @@
 /* Hier kommt der CSS-Code für die ganze Webseite rein */
+body {
+    background: grey;
+}
+
+.article-wrapper {
+    border: 1px solid;
+    padding: 2rem;
+}

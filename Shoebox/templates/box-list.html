@@ -1,0 +1,25 @@
+{% extends 'home.html' %}
+{%  load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{%  block title %}Shoebox list{% endblock %}
+
+{% block content %}
+<h2>Shoebox list</h2>
+<ul class="article-wrapper">
+    {% for box in all_the_boxes %}
+        <a href="{{ box.id }}/" class="article">
+            <img src="{{ box.image }}">
+            <!-- keine Ahnung ob das so überhaupt funktioniert mit dem img link -->
+            <div>{{ box.name }}</div>
+            <div>{{ box.brand }}</div>
+            <div>{{ box.width }} x {{ box.height }} x {{ box.length }}</div>
+            <div>{{ box.price }}</div>
+        </a>
+    {% endfor %}
+</ul>
+
+{% endblock %}
