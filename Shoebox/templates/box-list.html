@@ -12,7 +12,7 @@
 <ul class="article-wrapper">
     {% for box in all_the_boxes %}
         <a href="{{ box.id }}/" class="article">
-            <img src="{{ box.image }}">
+            <img src="/media/{{ box.image }}" width="50px">
             <!-- keine Ahnung ob das so überhaupt funktioniert mit dem img link -->
             <div>{{ box.name }}</div>
             <div>{{ box.brand }}</div>
