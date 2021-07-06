@@ -6,6 +6,25 @@
     <title>{% block title %}Base Titel{% endblock %}</title>
 </head>
 <body>
+    <header>
+        <h2>{% block header-title %}Header title{% endblock %}</h2>
+
+        {% if user.is_authenticated %}
+            {% block logged_in_content %}
+                <div class="header-user-bla">
+                    <div class="bla">
+                        <p class="header-user-name">{{ user.username }}</p>
+                        <a class="header-login-logout" href="{% url 'logout' %}">Logout</a>
+                    </div>
+                    <div class="avatar-small"></div>
+                </div>
+            {% endblock %}
+        {% else %}
+            {% block not_logged_in_content %}
+                <a class="header-login-logout" href="{% url 'login' %}">Login</a>
+            {% endblock %}
+        {% endif %}
+    </header>
     {% block content %}Base Block{% endblock %}
 </body>
 </html>

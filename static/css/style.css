@@ -1,9 +1,97 @@
-/* Hier kommt der CSS-Code für die ganze Webseite rein */
+* {
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+}
+
+a:link { text-decoration: none; }
+
 body {
-    background: grey;
+    background: white;
+    margin: 0;
+}
+
+header {
+    background: rgba(9, 9, 9, 0.07);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 .article-wrapper {
-    border: 1px solid;
     padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.article-image-wrapper {
+    width: 25rem;
+    height: 25rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.article-image:hover {
+    height: 110%;
+}
+
+.article-image {
+    image-rendering: optimizespeed;
+    height: 100%;
+}
+
+.article {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    background: #f1f1f1;
+    padding: 2rem;
+    margin: 2rem;
+}
+
+.article-info-small {
+    padding-top: 1rem;
+}
+
+.article-name {
+    color: black;
+    font-family: arial;
+    font-size: 16pt;
+}
+
+.article-price {
+    color: #666;
+    font-weight: bolder;
+    font-family: arial;
+    font-size: 32pt;
+    text-align: right;
+}
+
+.header-user-bla {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header-user-bla * {
+    margin: 0 0.5rem 0.5rem 0;
+}
+
+.header-user-name {
+    font-weight: bold;
+}
+
+.header-login-logout {
+    display: flex;
+    align-items: center;
+}
+
+.avatar-small {
+    width: 60px;
+    height: 60px;
+    background: red;
+    border-radius: 100px;
+    margin-right: 1rem;
 }

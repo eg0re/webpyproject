@@ -7,19 +7,23 @@
 
 {%  block title %}Shoebox list{% endblock %}
 
+{% block header-title %}Shoebox list{% endblock %}
+
 {% block content %}
-<h2>Shoebox list</h2>
-<ul class="article-wrapper">
-    {% for box in all_the_boxes %}
-        <a href="{{ box.id }}/" class="article">
-            <img src="/media/{{ box.image }}" width="50px">
-            <!-- keine Ahnung ob das so überhaupt funktioniert mit dem img link -->
-            <div>{{ box.name }}</div>
-            <div>{{ box.brand }}</div>
-            <div>{{ box.width }} x {{ box.height }} x {{ box.length }}</div>
-            <div>{{ box.price }}</div>
-        </a>
-    {% endfor %}
-</ul>
+    <ul class="article-wrapper">
+        {% for box in all_the_boxes %}
+            <a href="{{ box.id }}/" class="article">
+                <div class="article-image-wrapper">
+                    <img src="/media/{{ box.image }}" class="article-image">
+                </div>
+                <div class="article-info-small">
+                    <div class="article-name">{{ box.name }}</div>
+                    <div>{{ box.brand }}</div>
+                    <div>Größe: {{ box.width }} x {{ box.height }} x {{ box.length }}</div>
+                    <div class="article-price">{{ box.price }}€</div>
+                </div>
+            </a>
+        {% endfor %}
+    </ul>
 
 {% endblock %}
