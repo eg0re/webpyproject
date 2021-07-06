@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{%  load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{%  block title %}{{ specific_shoebox.name }}{% endblock %}
+
+{% block content %}
+    <div class="detail-wrapper">
+        <img src="/media/{{ specific_shoebox.image }}" class="detail-article-image">
+        <div class="article-info-small">
+            <div class="article-name">{{ specific_shoebox.name }}</div>
+            <div>{{ specific_shoebox.brand }}</div>
+            <div>Größe: {{ specific_shoebox.width }} x {{ specific_shoebox.height }} x {{ specific_shoebox.length }}</div>
+            <div class="article-price-detail">{{ specific_shoebox.price }}€</div>
+            <div class="article-description-detail">{{ specific_shoebox.description }}</div>
+        </div>
+    </div>
+{% endblock %}

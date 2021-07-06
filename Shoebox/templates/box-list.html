@@ -12,7 +12,7 @@
 {% block content %}
     <ul class="article-wrapper">
         {% for box in all_the_boxes %}
-            <a href="{{ box.id }}/" class="article">
+            <a href="box/{{ box.id }}/" class="article">
                 <div class="article-image-wrapper">
                     <img src="/media/{{ box.image }}" class="article-image">
                 </div>

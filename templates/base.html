@@ -7,11 +7,12 @@
 </head>
 <body>
     <header>
-        <h2>{% block header-title %}Header title{% endblock %}</h2>
+        <h2><a href="/">{% block header-title %}Header title{% endblock %}</a></h2>
 
         {% if user.is_authenticated %}
             {% block logged_in_content %}
                 <div class="header-user-bla">
+                    <a class="btn-create-new-box" href="{% url 'box-create' %}">add box</a>
                     <div class="bla">
                         <p class="header-user-name">{{ user.username }}</p>
                         <a class="header-login-logout" href="{% url 'logout' %}">Logout</a>

@@ -10,9 +10,13 @@ a:link { text-decoration: none; }
 body {
     background: white;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header {
+    width: 100%;
     background: rgba(9, 9, 9, 0.07);
     padding: 1rem;
     display: flex;
@@ -49,6 +53,8 @@ header {
     background: #f1f1f1;
     padding: 2rem;
     margin: 2rem;
+    border-radius: 5px;
+    box-shadow: #0000002e 1px 2px 2px 0px;
 }
 
 .article-info-small {
@@ -76,7 +82,7 @@ header {
 }
 
 .header-user-bla * {
-    margin: 0 0.5rem 0.5rem 0;
+    margin: 0 0.5rem 0.5rem 1rem;
 }
 
 .header-user-name {
@@ -94,4 +100,23 @@ header {
     background: red;
     border-radius: 100px;
     margin-right: 1rem;
+}
+
+.btn-create-new-box {
+    background: #575757;
+    color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: #0000002e 1px 2px 2px 0px;
+}
+
+.detail-article-image {
+    width: 100%;
+}
+
+.detail-wrapper {
+    width: 80%;
+    padding: 3rem;
+    margin: 3rem;
+    background: #f1f1f1;
 }
