@@ -12,17 +12,31 @@
 {% block content %}
     <ul class="article-wrapper">
         {% for box in all_the_boxes %}
-            <a href="box/{{ box.id }}/" class="article">
-                <div class="article-image-wrapper">
-                    <img src="/media/{{ box.image }}" class="article-image">
-                </div>
+            <div class="article">
+                <a href="box/{{ box.id }}/">
+                    <div class="article-image-wrapper">
+                        <img src="/media/{{ box.image }}" class="article-image" alt="shoebox image">
+                    </div>
+                </a>
+
                 <div class="article-info-small">
-                    <div class="article-name">{{ box.name }}</div>
-                    <div>{{ box.brand }}</div>
-                    <div>Größe: {{ box.width }} x {{ box.height }} x {{ box.length }}</div>
+                    <a href="box/{{ box.id }}/">
+                        <div class="article-name">{{ box.name }}</div>
+                    </a>
+                    <div class="article-details-wrapper">
+                        <div>
+                            <div>{{ box.brand }}</div>
+                            <div>Größe: {{ box.width }} x {{ box.height }} x {{ box.length }}</div>
+                            <!-- TODO: implement rating -->
+                            <div class="stars-average">⭐⭐⭐⭐ (4 Bewertungen)</div>
+                        </div>
+                        <div>
+                            <button class="add-item-button">+</button>
+                        </div>
+                    </div>
                     <div class="article-price">{{ box.price }}€</div>
                 </div>
-            </a>
+            </div>
         {% endfor %}
     </ul>
 

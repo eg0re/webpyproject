@@ -7,15 +7,43 @@
 
 {%  block title %}{{ specific_shoebox.name }}{% endblock %}
 
+{% block header-title %}Create a Box{% endblock %}
+
 {% block content %}
     <div class="detail-wrapper">
-        <img src="/media/{{ specific_shoebox.image }}" class="detail-article-image">
+        <img src="/media/{{ specific_shoebox.image }}" class="detail-article-image" alt="shoebox image">
         <div class="article-info-small">
             <div class="article-name">{{ specific_shoebox.name }}</div>
-            <div>{{ specific_shoebox.brand }}</div>
-            <div>Größe: {{ specific_shoebox.width }} x {{ specific_shoebox.height }} x {{ specific_shoebox.length }}</div>
-            <div class="article-price-detail">{{ specific_shoebox.price }}€</div>
+            <div class="article-details-wrapper">
+                <div>
+                    <div>Marke: {{ specific_shoebox.brand }}</div>
+                    <div>Größe: {{ specific_shoebox.width }} x {{ specific_shoebox.height }} x {{ specific_shoebox.length }} cm</div>
+                    <div class="article-price-detail">{{ specific_shoebox.price }}€</div>
+                </div>
+                <div>
+                    <button class="add-item-button">+</button>
+                </div>
+            </div>
+
             <div class="article-description-detail">{{ specific_shoebox.description }}</div>
+        </div>
+    </div>
+
+    <h2>Bewertungen</h2>
+    <div class="reviews-wrapper">
+        <div class="review">
+            <div class="reviewer-info">
+                <!-- TODO: implement user avatar -->
+                <div class="avatar-small"></div>
+                <div>
+                    <!-- TODO: implement username -->
+                    <p>PLATZHALTERNAME</p>
+                    <!-- TODO: implement rating -->
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+
+            </div>
+            <p>bla bla bla bla</p>
         </div>
     </div>
 {% endblock %}

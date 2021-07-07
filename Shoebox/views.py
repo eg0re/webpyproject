@@ -1,6 +1,5 @@
-from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView, DeleteView
 from .forms import ShoeboxForm
 from .models import Shoebox
 
@@ -26,3 +25,10 @@ class ShoeboxCreateView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+
+class ShoeboxDeleteView(DeleteView):
+    model = Shoebox
+    template_name = 'box-delete-confirm.html'
+    success_url = "/"
+
