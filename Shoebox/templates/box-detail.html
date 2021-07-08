@@ -31,19 +31,28 @@
 
     <h2>Bewertungen</h2>
     <div class="reviews-wrapper">
-        <div class="review">
-            <div class="reviewer-info">
-                <!-- TODO: implement user avatar -->
-                <div class="avatar-small"></div>
-                <div>
-                    <!-- TODO: implement username -->
-                    <p>PLATZHALTERNAME</p>
-                    <!-- TODO: implement rating -->
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                </div>
+        <form method="POST">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit">Add Review</button>
+        </form>
+        {% for comment in comments_specific_shoebox  %}
+            <div class="review">
+                <div class="reviewer-info">
+                    <!-- TODO: implement user avatar -->
+                    <div class="avatar-small"></div>
+                    <div>
+                        <!-- TODO: implement username -->
+                        <p>{{ comment.user.username }}</p>
+                        <!-- TODO: implement rating -->
+                        <p>{{ comment.timestamp }}</p>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
 
+                </div>
+                <p>{{ comment.text }}</p>
             </div>
-            <p>bla bla bla bla</p>
-        </div>
+        {% endfor %}
+
     </div>
 {% endblock %}

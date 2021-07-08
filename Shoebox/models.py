@@ -65,3 +65,44 @@ class Shoebox(models.Model):
                + self.description + " Flute Type: " + self.flute_type + " Flute Layers: " + self.flute_layers\
                + " Liner Type: " + self.liner_type + " Dimensions: Width: " + str(self.width) + " Height: "\
                + str(self.height) + " Length: " + str(self.length)
+
+
+class Comment(models.Model):
+    text = models.TextField(max_length=500)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    shoebox = models.ForeignKey(Shoebox, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['timestamp']
+        verbose_name = 'Comment'
+        verbose_name_plural = 'Comments'
+
+    def get_comment_prefix(self):
+        if len(self.text) > 50:
+            return self.text[:50] + '...'
+        else:
+            return self.text
+
+    def __str__(self):
+        return self.get_comment_prefix() + ' (' + self.user.username + ')'
+
+    def __repr__(self):
+        return self.get_comment_prefix() + ' (' + self.user.username + '/' + str(self.timestamp) + ')'
+
+
+class Vote(models.Model):
+    VOTE_TYPES = [
+        ('U', 'up'),
+        ('D', 'down'),
+    ]
+
+    up_or_down = models.CharField(max_length=1,
+                                  choices=VOTE_TYPES,
+                                 )
+    timestamp = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Shoebox, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.up_or_down + ' on ' + self.book.title + ' by ' + self.user.username
