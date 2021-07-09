@@ -42,11 +42,15 @@
                     <!-- TODO: implement user avatar -->
                     <div class="avatar-small"></div>
                     <div>
-                        <!-- TODO: implement username -->
                         <p>{{ comment.user.username }}</p>
-                        <!-- TODO: implement rating -->
                         <p>{{ comment.timestamp }}</p>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <div class="stars-wrapper">
+                            {% with ''|center:comment.rating as range %}
+                            {% for _ in range %}
+                                <div class="stars"></div>
+                            {% endfor %}
+                            {% endwith %}
+                        </div>
                     </div>
 
                 </div>

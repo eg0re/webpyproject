@@ -36,6 +36,7 @@ def shoebox_detail(request, **kwargs):
 #               'upvotes': shoebox.get_upvotes_count(),
 #               'downvotes': shoebox.get_downvotes_count(),
                'comment_form': CommentForm}
+
     return render(request, 'box-detail.html',  context)
 
 

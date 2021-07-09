@@ -161,3 +161,16 @@ header {
     margin-bottom: 3rem;
     box-shadow: #0000002e 1px 2px 2px 0px;
 }
+
+.stars {
+    background-image: url(../../media/misc/rating_stars.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1rem;
+    height: 1rem;
+}
+
+.stars-wrapper {
+    display: flex;
+    flex-direction: row;
+}

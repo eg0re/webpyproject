@@ -17,7 +17,7 @@ class ShoeboxForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['text']
+        fields = ['rating','text']
         widgets = {
             'user': forms.HiddenInput(),
             'shoebox': forms.HiddenInput(),

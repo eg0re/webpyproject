@@ -66,9 +66,19 @@ class Shoebox(models.Model):
                + " Liner Type: " + self.liner_type + " Dimensions: Width: " + str(self.width) + " Height: "\
                + str(self.height) + " Length: " + str(self.length)
 
-
+# TODO: don't allow multiple reviews from the same user
 class Comment(models.Model):
+    RATINGS = [
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5'),
+    ]
+
     text = models.TextField(max_length=500)
+    rating = models.IntegerField(choices=RATINGS,
+                              default='5')
     timestamp = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     shoebox = models.ForeignKey(Shoebox, on_delete=models.CASCADE)
