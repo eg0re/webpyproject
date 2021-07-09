@@ -1,5 +1,5 @@
 * {
-    font-family: Arial;
+    font-family: 'Montserrat', sans-serif;
     -webkit-transition: all .2s ease-in-out;
     -moz-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
@@ -7,6 +7,11 @@
 }
 
 a:link { text-decoration: none; }
+
+h2 {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 36pt;
+}
 
 body {
     background: white;
@@ -49,6 +54,10 @@ header {
     height: 100%;
 }
 
+.article-brand {
+    font-weight: 600;
+}
+
 .article {
     width: max-content;
     display: flex;
@@ -66,8 +75,8 @@ header {
 
 .article-name {
     color: black;
-    font-family: arial;
-    font-size: 16pt;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 26pt;
 }
 
 .article-price {

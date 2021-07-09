@@ -17,10 +17,12 @@ class ShoeboxForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['rating','text']
+        fields = ['rating', 'text']
         widgets = {
             'user': forms.HiddenInput(),
             'shoebox': forms.HiddenInput(),
         }
 
-
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        self.fields['text'].label = ""

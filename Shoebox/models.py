@@ -61,10 +61,11 @@ class Shoebox(models.Model):
         verbose_name_plural = 'Shoeboxes'
 
     def __str__(self):
-        return "Name: " + self.name + " Price: " + str(self.price) + " Brand " + self.brand + " Description: "\
-               + self.description + " Flute Type: " + self.flute_type + " Flute Layers: " + self.flute_layers\
-               + " Liner Type: " + self.liner_type + " Dimensions: Width: " + str(self.width) + " Height: "\
+        return "Name: " + self.name + " Price: " + str(self.price) + " Brand " + self.brand + " Description: " \
+               + self.description + " Flute Type: " + self.flute_type + " Flute Layers: " + self.flute_layers \
+               + " Liner Type: " + self.liner_type + " Dimensions: Width: " + str(self.width) + " Height: " \
                + str(self.height) + " Length: " + str(self.length)
+
 
 # TODO: don't allow multiple reviews from the same user
 class Comment(models.Model):
@@ -78,7 +79,7 @@ class Comment(models.Model):
 
     text = models.TextField(max_length=500)
     rating = models.IntegerField(choices=RATINGS,
-                              default='5')
+                                 default='5')
     timestamp = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     shoebox = models.ForeignKey(Shoebox, on_delete=models.CASCADE)
@@ -109,7 +110,7 @@ class Vote(models.Model):
 
     up_or_down = models.CharField(max_length=1,
                                   choices=VOTE_TYPES,
-                                 )
+                                  )
     timestamp = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Shoebox, on_delete=models.CASCADE)
