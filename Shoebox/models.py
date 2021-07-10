@@ -70,11 +70,11 @@ class Shoebox(models.Model):
 # TODO: don't allow multiple reviews from the same user
 class Comment(models.Model):
     RATINGS = [
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
-        ('4', '4'),
-        ('5', '5'),
+        (1, 1),
+        (2, 2),
+        (3, 3),
+        (4, 4),
+        (5, 5),
     ]
 
     text = models.TextField(max_length=500)

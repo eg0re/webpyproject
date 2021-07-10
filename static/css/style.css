@@ -6,7 +6,10 @@
     -ms-transition: all .2s ease-in-out;
 }
 
-a:link { text-decoration: none; }
+a:link {
+    text-decoration: none;
+    line-height: 2rem;
+}
 
 h2 {
     font-family: 'Permanent Marker', cursive;
@@ -27,6 +30,11 @@ header {
     padding: 1rem;
     display: flex;
     justify-content: space-between;
+}
+
+footer {
+    border-top: 1px solid #666;
+    padding: 3rem;
 }
 
 .article-wrapper {
@@ -71,6 +79,7 @@ header {
 
 .article-info-small {
     padding-top: 1rem;
+    width: 25rem;
 }
 
 .article-name {

@@ -12,7 +12,7 @@
 {% block content %}
     <ul class="article-wrapper">
         {% for box in all_the_boxes %}
-            <div class="article">
+            <article class="article">
                 <a href="box/{{ box.id }}/">
                     <div class="article-image-wrapper">
                         <img src="/media/{{ box.image }}" class="article-image" alt="shoebox image">
@@ -20,8 +20,8 @@
                 </a>
 
                 <div class="article-info-small">
-                    <a href="box/{{ box.id }}/">
-                        <div class="article-name">{{ box.name }}</div>
+                    <a href="box/{{ box.id }}/" class="article-name">
+                        {{ box.name }}
                     </a>
                     <div class="article-details-wrapper">
                         <div>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="article-price">{{ box.price }}€</div>
                 </div>
-            </div>
+            </article>
         {% endfor %}
     </ul>
 

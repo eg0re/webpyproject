@@ -1,7 +1,7 @@
 # Anforderungen
 ## Ein Online-Shop
 - [x] Freie Auswahl von Produkten
-- [ ] Produkt mit Name, Text-Beschreibung, Bild(ern), Preis
+- [x] Produkt mit Name, Text-Beschreibung, Bild(ern), Preis
 - [ ] Produkt-Info-PDF zum Herunterladen (es geht um die Funktionalität zum Herunterladen, PDFs brauchen nicht ausführlich sein)
 
 ## Benutzer-Profil

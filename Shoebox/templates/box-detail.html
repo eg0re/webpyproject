@@ -30,14 +30,14 @@
     </div>
 
     <h2>Bewertungen</h2>
-    <div class="reviews-wrapper">
+    <section class="reviews-wrapper">
         <form method="POST">
             {% csrf_token %}
             {{ comment_form.as_p }}
             <button type="submit">Add Review</button>
         </form>
         {% for comment in comments_specific_shoebox  %}
-            <div class="review">
+            <article class="review">
                 <div class="reviewer-info">
                     <!-- TODO: implement user avatar -->
                     <div class="avatar-small"></div>
@@ -55,8 +55,8 @@
 
                 </div>
                 <p>{{ comment.text }}</p>
-            </div>
+            </article>
         {% endfor %}
 
-    </div>
+    </section>
 {% endblock %}
