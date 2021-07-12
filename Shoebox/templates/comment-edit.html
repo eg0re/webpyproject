@@ -1,0 +1,8 @@
+{% extends 'box-detail.html' %}
+{%  load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{%  block title %}{{ specific_shoebox.name }}{% endblock %}

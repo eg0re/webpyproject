@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, DeleteView
 from .forms import ShoeboxForm, CommentForm
@@ -19,7 +19,7 @@ class ShoeboxDetailView(DetailView):
 
 
 def shoebox_detail(request, **kwargs):
-    box_id = kwargs['pk']
+    box_id = kwargs['bpk']
     shoebox = Shoebox.objects.get(id=box_id)
 
     if request.method == 'POST':
@@ -35,11 +35,13 @@ def shoebox_detail(request, **kwargs):
         else:
             print(form.errors)
 
-    comments = Comment.objects.filter(shoebox=shoebox)
+    comments = Comment.objects.filter(shoebox_id=box_id)
+    comment = get_object_or_404(Comment, shoebox_id=box_id, )
+
     context = {'specific_shoebox': shoebox,
                'comments_specific_shoebox': comments,
-               #               'upvotes': shoebox.get_upvotes_count(),
-               #               'downvotes': shoebox.get_downvotes_count(),
+               'upvotes': comment.get_upvotes_count(),
+               'downvotes': comment.get_downvotes_count(),
                'comment_form': CommentForm}
 
     return render(request, 'box-detail.html', context)
@@ -60,3 +62,10 @@ class ShoeboxDeleteView(DeleteView):
     model = Shoebox
     template_name = 'box-delete-confirm.html'
     success_url = "/"
+
+
+def vote(request, pk: str, up_or_down: str):
+    comment = Comment.objects.get(id=int(pk))
+    user = request.user
+    comment.vote(user, up_or_down)
+    return redirect('box-detail', bpk=comment.shoebox_id)

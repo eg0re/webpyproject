@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{%  load static %}
+{% load static %}
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 {% endblock %}
 
-{%  block title %}{{ specific_shoebox.name }}{% endblock %}
+{% block title %}{{ specific_shoebox.name }}{% endblock %}
 
 {% block header-title %}Create a Box{% endblock %}
 
@@ -17,7 +17,9 @@
             <div class="article-details-wrapper">
                 <div>
                     <div>Marke: {{ specific_shoebox.brand }}</div>
-                    <div>Größe: {{ specific_shoebox.width }} x {{ specific_shoebox.height }} x {{ specific_shoebox.length }} cm</div>
+                    <div>Größe: {{ specific_shoebox.width }} x {{ specific_shoebox.height }}
+                        x {{ specific_shoebox.length }} cm
+                    </div>
                     <div class="article-price-detail">{{ specific_shoebox.price }}€</div>
                 </div>
                 <div>
@@ -38,37 +40,50 @@
         </form>
 
         {% if messages %}
-            <ul class="messages">
+            <ul class="messages notice">
                 {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                 {% endfor %}
             </ul>
         {% endif %}
 
-        {% for comment in comments_specific_shoebox  %}
+        {% for comment in comments_specific_shoebox %}
             <article class="review">
-                <div class="reviewer-info">
-                    <!-- TODO: implement user avatar -->
-                    <div class="avatar-small"></div>
-                    <div>
-                        <p>{{ comment.user.username }}</p>
-                        <p>{{ comment.timestamp }}</p>
-                        <div class="stars-wrapper">
-                            {% with ''|center:comment.rating as range %}
-                            {% for _ in range %}
-                                <div class="stars"></div>
-                            {% endfor %}
-                            {% endwith %}
+                <aside class="votes">
+                    <span>{{ upvotes }}</span>
+                    <a href="{% url 'comment-vote' comment.id 'up' %}">
+                        <img src="{% static '../media/misc/upvote.png' %}" alt="upvote" class="upvote arrow">
+                    </a>
+                    <a href="{% url 'comment-vote' comment.id 'down' %}">
+                        <img src="{% static '../media/misc/downvote.png' %}" alt="downvote" class="downvote arrow">
+                    </a>
+                    <span>{{ downvotes }}</span>
+                </aside>
+
+                <div>
+                    <div class="reviewer-info">
+                        <!-- TODO: implement user avatar -->
+                        <div class="avatar-small"></div>
+                        <div>
+                            <p>{{ comment.user.username }}</p>
+                            <p>{{ comment.timestamp }}</p>
+                            <div class="stars-wrapper">
+                                {% with ''|center:comment.rating as range %}
+                                    {% for _ in range %}
+                                        <div class="stars"></div>
+                                    {% endfor %}
+                                {% endwith %}
+                            </div>
                         </div>
                     </div>
+                    <p>{{ comment.text }}</p>
 
+                    <!-- TODO: make real comment remove button and not just a ph -->
+                    {% if user.is_authenticated %}
+                        <a class="alert btn " href="{% url 'box-create' %}">Im a fake delete comment button</a>
+                        <a class="notice btn" href="{% url 'box-create' %}">Im a fake edit comment button</a>
+                    {% endif %}
                 </div>
-                <p>{{ comment.text }}</p>
-
-                <!-- TODO: make real comment remove button and not just a ph -->
-                {% if user.is_authenticated %}
-                            <a class="btn" href="{% url 'box-create' %}">Im a fake delete comment button</a>
-                {% endif %}
             </article>
         {% endfor %}
 

@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <h2><a href="/">{% block header-title %}Header title{% endblock %}</a></h2>
+        <a href="/" class="logo-wrapper"><img src="/media/misc/logo.png" class="logo"></a>
 
         {% if user.is_authenticated %}
             {% block logged_in_content_header %}
@@ -30,6 +30,7 @@
         {% endif %}
     </header>
     {% block content %}Base Block{% endblock %}
+
 </body>
 <footer>
     &copy; 2021 - Impressum - Kontakt - FAQ - Sitemap

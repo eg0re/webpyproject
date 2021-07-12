@@ -30,6 +30,7 @@ header {
     padding: 1rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 footer {
@@ -37,12 +38,18 @@ footer {
     padding: 3rem;
 }
 
+.logo {
+    height: 2rem;
+}
+
+.logo-wrapper {
+    padding-left: 2rem;
+}
+
 .messages {
     text-decoration: none;
     list-style: none;
     padding: 1rem;
-    background: #ffdb1a;
-    border: 1px solid #ccb274;
 }
 
 .article-wrapper {
@@ -139,6 +146,17 @@ footer {
     box-shadow: #0000002e 1px 2px 2px 0px;
 }
 
+.alert {
+    background: #8e2323;
+    border: 1px solid #5e2929;
+}
+
+.notice {
+    background: #ffdb1a;
+    border: 1px solid #ccb274;
+    color: black;
+}
+
 .detail-article-image {
     width: 100%;
 }
@@ -186,6 +204,28 @@ footer {
     background: white;
     margin-bottom: 3rem;
     box-shadow: #0000002e 1px 2px 2px 0px;
+    display: flex;
+    flex-direction: row;
+}
+
+.votes {
+    padding: 1rem 2rem 1rem 0rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.arrow {
+    width: 1.5rem;
+}
+
+.upvote {
+
+}
+
+.downvote {
+
 }
 
 .stars {
