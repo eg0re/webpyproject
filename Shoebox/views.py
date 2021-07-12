@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, DeleteView
@@ -25,7 +26,11 @@ def shoebox_detail(request, **kwargs):
         form = CommentForm(request.POST)
         form.instance.user = request.user
         form.instance.shoebox = shoebox
-        if form.is_valid():
+        if Comment.objects.filter(user_id=request.user).exists():
+            messages.info(request, 'You already reviewed this box!')
+            print(form.errors)
+            print("user already reviewed that box")
+        elif form.is_valid():
             form.save()
         else:
             print(form.errors)
@@ -33,11 +38,11 @@ def shoebox_detail(request, **kwargs):
     comments = Comment.objects.filter(shoebox=shoebox)
     context = {'specific_shoebox': shoebox,
                'comments_specific_shoebox': comments,
-#               'upvotes': shoebox.get_upvotes_count(),
-#               'downvotes': shoebox.get_downvotes_count(),
+               #               'upvotes': shoebox.get_upvotes_count(),
+               #               'downvotes': shoebox.get_downvotes_count(),
                'comment_form': CommentForm}
 
-    return render(request, 'box-detail.html',  context)
+    return render(request, 'box-detail.html', context)
 
 
 class ShoeboxCreateView(CreateView):

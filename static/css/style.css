@@ -37,6 +37,14 @@ footer {
     padding: 3rem;
 }
 
+.messages {
+    text-decoration: none;
+    list-style: none;
+    padding: 1rem;
+    background: #ffdb1a;
+    border: 1px solid #ccb274;
+}
+
 .article-wrapper {
     width: 100%;
     display: flex;
@@ -123,7 +131,7 @@ footer {
     margin-right: 1rem;
 }
 
-.btn-create-new-box {
+.btn {
     background: #575757;
     color: white;
     padding: 1rem;
