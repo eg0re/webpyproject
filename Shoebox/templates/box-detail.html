@@ -50,14 +50,14 @@
         {% for comment in comments_specific_shoebox %}
             <article class="review">
                 <aside class="votes">
-                    <span>{{ upvotes }}</span>
+                    <span>{{ comment.get_upvotes_count }}</span>
                     <a href="{% url 'comment-vote' comment.id 'up' %}">
                         <img src="{% static '../media/misc/upvote.png' %}" alt="upvote" class="upvote arrow">
                     </a>
                     <a href="{% url 'comment-vote' comment.id 'down' %}">
                         <img src="{% static '../media/misc/downvote.png' %}" alt="downvote" class="downvote arrow">
                     </a>
-                    <span>{{ downvotes }}</span>
+                    <span>{{ comment.get_downvotes_count }}</span>
                 </aside>
 
                 <div>
@@ -79,6 +79,7 @@
                     <p>{{ comment.text }}</p>
 
                     <!-- TODO: make real comment remove button and not just a ph -->
+                    <!-- TODO: make real comment edit button -->
                     {% if user.is_authenticated %}
                         <a class="alert btn " href="{% url 'box-create' %}">Im a fake delete comment button</a>
                         <a class="notice btn" href="{% url 'box-create' %}">Im a fake edit comment button</a>

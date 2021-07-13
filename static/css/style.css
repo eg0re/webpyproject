@@ -228,6 +228,14 @@ footer {
 
 }
 
+.search {
+    padding: 0.5rem 6rem 0.5rem 1rem;
+    background: white;
+    border: 1px solid #c4c4c4;
+    text-align: start;
+    color: #6a6a6a;
+}
+
 .stars {
     background-image: url(../../media/misc/rating_stars.png);
     background-size: contain;

@@ -36,14 +36,13 @@ def shoebox_detail(request, **kwargs):
             print(form.errors)
 
     comments = Comment.objects.filter(shoebox_id=box_id)
-    comment = get_object_or_404(Comment, shoebox_id=box_id, )
+    if not comments.exists():
+        comments = None
+        print("keine Kommentare vorhanden")
 
     context = {'specific_shoebox': shoebox,
                'comments_specific_shoebox': comments,
-               'upvotes': comment.get_upvotes_count(),
-               'downvotes': comment.get_downvotes_count(),
                'comment_form': CommentForm}
-
     return render(request, 'box-detail.html', context)
 
 

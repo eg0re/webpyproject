@@ -95,25 +95,26 @@ class Comment(models.Model):
             return self.text
 
     def get_upvotes(self):
-        upvotes = Vote.objects.filter(up_or_down='U')
+        upvotes = Vote.objects.filter(up_or_down='U', comment_id=self.id)
         return upvotes
 
     def get_upvotes_count(self):
         return len(self.get_upvotes())
 
     def get_downvotes(self):
-        downvotes = Vote.objects.filter(up_or_down='D',
-                                        comment=self)
+        downvotes = Vote.objects.filter(up_or_down='D', comment_id=self.id)
+        if not downvotes.exists():
+            return 0
         return downvotes
 
     def get_downvotes_count(self):
         return len(self.get_downvotes())
 
     def vote(self, user, up_or_down):
-        U_or_D = 'U'
+        u_or_d = 'U'
         if up_or_down == 'down':
-            U_or_D = 'D'
-        vote = Vote.objects.create(up_or_down=U_or_D,
+            u_or_d = 'D'
+        vote = Vote.objects.create(up_or_down=u_or_d,
                                    user=user,
                                    comment=self
                                    )
