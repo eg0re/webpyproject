@@ -60,6 +60,12 @@ class Shoebox(models.Model):
         verbose_name = 'Shoebox'
         verbose_name_plural = 'Shoeboxes'
 
+    def get_comments(self):
+        return Comment.objects.filter(shoebox_id=self.id)
+
+    def get_comments_count(self):
+        return len(self.get_comments())
+
     def __str__(self):
         return "Name: " + self.name + " Price: " + str(self.price) + " Brand " + self.brand + " Description: " \
                + self.description + " Flute Type: " + self.flute_type + " Flute Layers: " + self.flute_layers \
@@ -103,8 +109,6 @@ class Comment(models.Model):
 
     def get_downvotes(self):
         downvotes = Vote.objects.filter(up_or_down='D', comment_id=self.id)
-        if not downvotes.exists():
-            return 0
         return downvotes
 
     def get_downvotes_count(self):
@@ -114,16 +118,19 @@ class Comment(models.Model):
         u_or_d = 'U'
         if up_or_down == 'down':
             u_or_d = 'D'
-        vote = Vote.objects.create(up_or_down=u_or_d,
-                                   user=user,
-                                   comment=self
-                                   )
+
+        Vote.objects.create(up_or_down=u_or_d,
+                            user=user,
+                            comment_id=self.id,
+                            shoebox_id=int(self.shoebox_id)
+                            )
 
     def __str__(self):
         return self.get_comment_prefix() + ' (' + self.user.username + ')'
 
     def __repr__(self):
-        return self.get_comment_prefix() + ' (' + self.user.username + '/' + str(self.timestamp) + ')'
+        return self.get_comment_prefix() + ' (' + self.user.username + '/' + str(self.timestamp) + ')' +\
+               'shoeboxid = ' + str(self.shoebox_id)
 
 
 class Vote(models.Model):
@@ -138,6 +145,7 @@ class Vote(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    shoebox = models.ForeignKey(Shoebox, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.up_or_down + ' on ' + self.comment.name + ' by ' + self.user.username

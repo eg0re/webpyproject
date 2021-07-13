@@ -26,9 +26,9 @@
                     <div class="article-details-wrapper">
                         <div>
                             <div class="article-brand">{{ box.brand }}</div>
-                            <div>Größe: {{ box.width }} x {{ box.height }} x {{ box.length }}</div>
+                            <div>dimensions: {{ box.width }} x {{ box.height }} x {{ box.length }}</div>
                             <!-- TODO: implement rating -->
-                            <div class="stars-average">⭐⭐⭐⭐ (4 Bewertungen)</div>
+                            <div class="stars-average">⭐⭐⭐⭐ ({{ box.get_comments_count }} ratings)</div>
                         </div>
                         <div>
                             <button class="add-item-button">+</button>

@@ -22,11 +22,16 @@ def shoebox_detail(request, **kwargs):
     box_id = kwargs['bpk']
     shoebox = Shoebox.objects.get(id=box_id)
 
+    comments = Comment.objects.filter(shoebox_id=box_id)
+
     if request.method == 'POST':
         form = CommentForm(request.POST)
         form.instance.user = request.user
         form.instance.shoebox = shoebox
-        if Comment.objects.filter(user_id=request.user).exists():
+
+        user_in_comments = comments.filter(user_id=request.user)
+
+        if user_in_comments.exists():
             messages.info(request, 'You already reviewed this box!')
             print(form.errors)
             print("user already reviewed that box")
@@ -35,7 +40,6 @@ def shoebox_detail(request, **kwargs):
         else:
             print(form.errors)
 
-    comments = Comment.objects.filter(shoebox_id=box_id)
     if not comments.exists():
         comments = None
         print("keine Kommentare vorhanden")
