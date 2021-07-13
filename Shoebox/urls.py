@@ -7,4 +7,5 @@ urlpatterns = [
     path('add/', views.ShoeboxCreateView.as_view(), name="box-create"),
     path('<int:pk>/<str:up_or_down>/', views.vote, name='comment-vote'),
     path('box/<int:pk>/delete/', views.ShoeboxDeleteView.as_view(), name='box-delete'),
+    path("search/", views.box_search, name="box_search")
 ]

@@ -1,0 +1,54 @@
+{% extends 'home.html' %}
+{%  load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{%  block title %}Shoebox search{% endblock %}
+
+{% block header-title %}Shoebox search{% endblock %}
+
+{% block content %}
+    {%  if user.is_authenticated %}
+        <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">SEARCH</button>
+        </form>
+
+        {% if show_results %}
+            <b>Results:</b><br>
+            <ul>
+            {% for box in boxes_found %}
+                <br>
+                <article class="article">
+                    <a href="../box/{{ box.id }}/">
+                        <div class="article-image-wrapper">
+                            <img src="/media/{{ box.image }}" class="article-image" alt="shoebox image">
+                        </div>
+                    </a>
+
+                    <div class="article-info-small">
+                        <a href="../box/{{ box.id }}/" class="article-name">
+                            {{ box.name }}
+                        </a>
+                        <div class="article-details-wrapper">
+                            <div>
+                                <div class="article-brand">{{ box.brand }}</div>
+                                <div>Größe: {{ box.width }} x {{ box.height }} x {{ box.length }}</div>
+                                <!-- TODO: implement rating -->
+                                <div class="stars-average">⭐⭐⭐⭐ (4 Bewertungen)</div>
+                            </div>
+                            <div>
+                                <button class="add-item-button">+</button>
+                            </div>
+                        </div>
+                        <div class="article-price">{{ box.price }}€</div>
+                    </div>
+                </article>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+{% endblock %}

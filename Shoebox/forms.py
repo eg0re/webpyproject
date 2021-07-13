@@ -26,3 +26,13 @@ class CommentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CommentForm, self).__init__(*args, **kwargs)
         self.fields['text'].label = ""
+
+
+class SearchForm(forms.ModelForm):
+
+    description = forms.CharField(required=False)
+    name = forms.CharField(required=False)
+
+    class Meta:
+        model = Shoebox
+        fields = ['name', 'description']

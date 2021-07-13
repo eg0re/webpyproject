@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, DeleteView
-from .forms import ShoeboxForm, CommentForm
+from .forms import ShoeboxForm, CommentForm, SearchForm
 from .models import Shoebox, Comment
 
 
@@ -69,3 +69,23 @@ def vote(request, pk: str, up_or_down: str):
     user = request.user
     comment.vote(user, up_or_down)
     return redirect('box-detail', bpk=comment.shoebox_id)
+
+
+def box_search(request):
+    if request.method == "POST":
+        search_string_name = request.POST['name']
+        boxes_found = Shoebox.objects.filter(name__contains=search_string_name)
+
+        search_string_description = request.POST['description']
+        if search_string_description:
+            boxes_found = boxes_found.filter(description__contains=search_string_description)
+
+        form = SearchForm()
+        context = {'form': form,
+                   'boxes_found': boxes_found,
+                   'show_results': True}
+        return render(request, 'box-search.html', context)
+    else:
+        form = SearchForm()
+        context = {"form": form, "show_results": False}
+        return render(request, "box-search.html", context)
