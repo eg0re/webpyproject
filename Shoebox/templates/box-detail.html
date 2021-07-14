@@ -9,7 +9,7 @@
 
 {% block header-title %}Create a Box{% endblock %}
 
-{% block content %}
+{% block logged_in_content %}
     <div class="detail-wrapper">
         <img src="/media/{{ specific_shoebox.image }}" class="detail-article-image" alt="shoebox image">
         <div class="article-info-small">
@@ -57,6 +57,75 @@
                         <img src="{% static '../media/misc/upvote.png' %}" alt="upvote" class="upvote arrow">
                     </a>
                     <a href="{% url 'comment-vote' comment.id 'down' %}">
+                        <img src="{% static '../media/misc/downvote.png' %}" alt="downvote" class="downvote arrow">
+                    </a>
+                    <span>{{ comment.get_downvotes_count }}</span>
+                </aside>
+
+                <div>
+                    <div class="reviewer-info">
+                        <!-- TODO: implement user avatar -->
+                        <div class="avatar-small"></div>
+                        <div>
+                            <p>{{ comment.user.username }}</p>
+                            <p>{{ comment.timestamp }}</p>
+                            <div class="stars-wrapper">
+                                {% with ''|center:comment.rating as range %}
+                                    {% for _ in range %}
+                                        <div class="stars"></div>
+                                    {% endfor %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                    <p>{{ comment.text }}</p>
+
+                    <!-- TODO: make real comment remove button and not just a ph -->
+                    <!-- TODO: make real comment edit button -->
+                    {% if user.is_authenticated %}
+                        <a class="alert btn " href="{% url 'box-create' %}">Im a fake delete comment button</a>
+                        <a class="notice btn" href="{% url 'box-create' %}">Im a fake edit comment button</a>
+                    {% endif %}
+                </div>
+            </article>
+        {% endfor %}
+
+    </section>
+{% endblock %}
+
+{% block not_logged_in_content %}
+    <div class="detail-wrapper">
+        <img src="/media/{{ specific_shoebox.image }}" class="detail-article-image" alt="shoebox image">
+        <div class="article-info-small">
+            <div class="article-name">{{ specific_shoebox.name }}</div>
+            <div class="article-details-wrapper">
+                <div>
+                    <div>Marke: {{ specific_shoebox.brand }}</div>
+                    <div>Größe: {{ specific_shoebox.width }} x {{ specific_shoebox.height }}
+                        x {{ specific_shoebox.length }} cm
+                    </div>
+                    <div class="article-price-detail">{{ specific_shoebox.price }}€</div>
+                </div>
+                <div>
+                    <!-- document icon from https://feathericons.com/ 14.07.21 -->
+                    <a href="{% url 'pdfdl' specific_shoebox.id %}" class="notice button" title="download pdf"><img src="../../media/misc/file-text.svg" alt="download PDF"> </a>
+                </div>
+            </div>
+
+            <div class="article-description-detail">{{ specific_shoebox.description }}</div>
+        </div>
+    </div>
+
+    <h2>Bewertungen</h2>
+    <section class="reviews-wrapper">
+        {% for comment in comments_specific_shoebox %}
+            <article class="review">
+                <aside class="votes">
+                    <span>{{ comment.get_upvotes_count }}</span>
+                    <a href="{% url 'login' %}">
+                        <img src="{% static '../media/misc/upvote.png' %}" alt="upvote" class="upvote arrow">
+                    </a>
+                    <a href="{% url 'login' %}">
                         <img src="{% static '../media/misc/downvote.png' %}" alt="downvote" class="downvote arrow">
                     </a>
                     <span>{{ comment.get_downvotes_count }}</span>
