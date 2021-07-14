@@ -11,15 +11,15 @@
 
 {% block content %}
     {%  if user.is_authenticated %}
-        <form method="post">
+        <form id="search_form" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">SEARCH</button>
+        <button class="submit_button" type="submit">SEARCH</button>
         </form>
 
         {% if show_results %}
-            <b>Results:</b><br>
-            <ul>
+            <b>Results:</b>
+            <ul class="article-wrapper">
             {% for box in boxes_found %}
                 <br>
                 <article class="article">

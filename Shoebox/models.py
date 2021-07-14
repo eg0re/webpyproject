@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from Useradmin.models import MyUser
 
 # Create your models here.
 
@@ -97,7 +97,7 @@ class Comment(models.Model):
     rating = models.IntegerField(choices=RATINGS,
                                  default='5')
     timestamp = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     shoebox = models.ForeignKey(Shoebox, on_delete=models.CASCADE)
 
     class Meta:
@@ -154,7 +154,7 @@ class Vote(models.Model):
                                   choices=VOTE_TYPES,
                                   )
     timestamp = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     shoebox = models.ForeignKey(Shoebox, on_delete=models.CASCADE)
 

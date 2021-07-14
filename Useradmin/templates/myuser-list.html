@@ -1,0 +1,19 @@
+{% extends 'home.html' %}
+{%  load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block title %}Users list{% endblock %}
+
+{% block content %}
+<h2>Users list</h2>
+<ul>
+    {% for myuser in all_myusers %}
+        {{ myuser.user.username }}<br>
+        <img src="{{ myuser.profile_picture.url }}" height="150" width="150"><br>
+        <br>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -271,3 +271,17 @@ footer {
     display: flex;
     flex-direction: row;
 }
+
+#search_form {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#search_form p label:after {
+    content: "\A";
+    white-space: pre;
+}
+
+#search_form p input {
+    margin-top: 5px;
+}
