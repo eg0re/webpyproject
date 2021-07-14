@@ -1,10 +1,15 @@
-{%  extends 'base.html' %}
+{% extends 'home.html' %}
+{%  load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock %}
 
 {%  block title %}Login{% endblock %}
 
-{%  block content %}
+{%  block not_logged_in_content %}
     <h2>Login</h2>
-    <form method="post">
+    <form class="login-form" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Login</button>

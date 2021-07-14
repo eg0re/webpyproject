@@ -1,4 +1,4 @@
-{% extends 'home.html' %}
+{% extends 'base.html' %}
 {%  load static %}
 
 {% block css %}
@@ -9,7 +9,7 @@
 
 {% block header-title %}Shoebox list{% endblock %}
 
-{% block content %}
+{% block logged_in_content %}
     <ul class="article-wrapper">
         {% for box in all_the_boxes %}
             <article class="article">
@@ -38,6 +38,41 @@
                         </div>
                         <div>
                             <button class="add-item button">+</button>
+                        </div>
+                    </div>
+                    <div class="article-price">{{ box.price }}€</div>
+                </div>
+            </article>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block not_logged_in_content %}
+    <ul class="article-wrapper">
+        {% for box in all_the_boxes %}
+            <article class="article">
+                <a href="box/{{ box.id }}/">
+                    <div class="article-image-wrapper">
+                        <img src="/media/{{ box.image }}" class="article-image" alt="shoebox image">
+                    </div>
+                </a>
+
+                <div class="article-info-small">
+                    <a href="box/{{ box.id }}/" class="article-name">
+                        {{ box.name }}
+                    </a>
+                    <div class="article-details-wrapper">
+                        <div>
+                            <div class="article-brand">{{ box.brand }}</div>
+                            <div>dimensions: {{ box.width }} x {{ box.height }} x {{ box.length }}</div>
+                            <div class="stars-wrapper">
+                                {% with ''|center:box.get_box_rating as range %}
+                                    {% for _ in range %}
+                                        <div class="stars"></div>
+                                    {% endfor %}
+                                {% endwith %}
+                                 ({{ box.get_comments_count }} ratings)
+                            </div>
                         </div>
                     </div>
                     <div class="article-price">{{ box.price }}€</div>

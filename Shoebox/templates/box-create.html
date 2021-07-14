@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock %}
 
 {% block title %}Add Box{% endblock %}
 
 {% block logged_in_content %}
     <h2>Add Box</h2>
-        <form method="POST">
+        <form class="add-form" method="POST">
             {% csrf_token %}
-            <! -- {{ form.as_table }} -->
-            {{ form.as_p }}
+            {{ form.as_table }}
             <button type="submit">Add Box</button>
         </form>
 {% endblock %}

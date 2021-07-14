@@ -8,6 +8,7 @@ import io
 from django.http import FileResponse
 from reportlab.pdfgen import canvas
 
+
 class ShoeboxListView(ListView):
     model = Shoebox
     context_object_name = 'all_the_boxes'
@@ -52,15 +53,21 @@ def shoebox_detail(request, **kwargs):
     return render(request, 'box-detail.html', context)
 
 
-class ShoeboxCreateView(CreateView):
-    model = Shoebox
-    form_class = ShoeboxForm
-    template_name = 'box-create.html'
-    success_url = reverse_lazy('box-list')
+def shoebox_create(request):
+    if request.method == 'POST':
+        form = ShoeboxForm(request.POST)
+        form.instance.user = request.user
+        if form.is_valid():
+            form.save()
+        else:
+            pass
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+        return redirect('box-list')
+
+    else:
+        form = ShoeboxForm()
+        context = {'form': form}
+        return render(request, 'box-create.html', context)
 
 
 class ShoeboxDeleteView(DeleteView):
@@ -77,7 +84,6 @@ def vote(request, pk: str, up_or_down: str):
 
 
 def pdfdl(request, pk: str):
-
     shoebox = Shoebox.objects.filter(id=pk)[0]
 
     # Create a file-like buffer to receive PDF data.
@@ -97,7 +103,7 @@ def pdfdl(request, pk: str):
     # FileResponse sets the Content-Disposition header so that browsers
     # present the option to save the file.
     buffer.seek(0)
-    return FileResponse(buffer, as_attachment=True, filename= str(shoebox.id) + '.pdf')
+    return FileResponse(buffer, as_attachment=True, filename=str(shoebox.id) + '.pdf')
     return redirect('box-detail', bpk=pk)
 
 
