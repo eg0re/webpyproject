@@ -16,7 +16,7 @@
             {% block logged_in_content_header %}
                 <div class="header-user-bla">
                     <a class="btn" href="{% url 'box-create' %}">add box</a>
-                    <div class="bla">
+                    <div class="fc">
                         <p class="header-user-name">{{ user.username }}</p>
                         <a class="header-login-logout" href="{% url 'logout' %}">Logout</a>
                     </div>
@@ -25,7 +25,10 @@
             {% endblock %}
         {% else %}
             {% block not_logged_in_content_header %}
-                <a class="header-login-logout" href="{% url 'login' %}">Login</a>
+                <div class="fr">
+                    <a class="header-login-logout" href="{% url 'login' %}">Login</a>
+                    <a class="header-login-logout" href="{% url 'signup' %}">Signup</a>
+                </div>
             {% endblock %}
         {% endif %}
     </header>

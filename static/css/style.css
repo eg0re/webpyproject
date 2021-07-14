@@ -94,7 +94,7 @@ footer {
 
 .article-info-small {
     padding-top: 1rem;
-    width: 25rem;
+    width: 100%;
 }
 
 .article-name {
@@ -128,6 +128,9 @@ footer {
 .header-login-logout {
     display: flex;
     align-items: center;
+    padding: 0;
+    font-weight: normal;
+    color: black;
 }
 
 .avatar-small {
@@ -175,9 +178,8 @@ footer {
     padding-bottom: 1rem;
 }
 
-.add-item-button {
+.button {
     padding: 0.5rem 1.5rem 0.5rem 1.5rem;
-    background: #8cce3c;
     color: white;
     font-weight: bold;
     font-size: 26pt;
@@ -185,6 +187,27 @@ footer {
     box-shadow: #0000002e 1px 2px 2px 0px;
     border: none;
     cursor: pointer;
+}
+
+.add-item {
+    background: #8cce3c;
+}
+
+.fr {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.fr > * {
+    padding: 1rem;
+}
+
+.fc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
 }
 
 .reviews-wrapper {

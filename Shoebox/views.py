@@ -4,7 +4,9 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, DeleteView
 from .forms import ShoeboxForm, CommentForm, SearchForm
 from .models import Shoebox, Comment
-
+import io
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
 
 class ShoeboxListView(ListView):
     model = Shoebox
@@ -72,6 +74,31 @@ def vote(request, pk: str, up_or_down: str):
     user = request.user
     comment.vote(user, up_or_down)
     return redirect('box-detail', bpk=comment.shoebox_id)
+
+
+def pdfdl(request, pk: str):
+
+    shoebox = Shoebox.objects.filter(id=pk)[0]
+
+    # Create a file-like buffer to receive PDF data.
+    buffer = io.BytesIO()
+
+    # Create the PDF object, using the buffer as its "file."
+    p = canvas.Canvas(buffer)
+
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
+    p.drawString(100, 100, "Box Name: " + shoebox.name)
+
+    # Close the PDF object cleanly, and we're done.
+    p.showPage()
+    p.save()
+
+    # FileResponse sets the Content-Disposition header so that browsers
+    # present the option to save the file.
+    buffer.seek(0)
+    return FileResponse(buffer, as_attachment=True, filename= str(shoebox.id) + '.pdf')
+    return redirect('box-detail', bpk=pk)
 
 
 def box_search(request):

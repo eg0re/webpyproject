@@ -23,7 +23,8 @@
                     <div class="article-price-detail">{{ specific_shoebox.price }}€</div>
                 </div>
                 <div>
-                    <button class="add-item-button">+</button>
+                    <button class="add-item button">+</button>
+                    <a href="{% url 'pdfdl' specific_shoebox.id %}" class="notice button" title="download pdf"><img src="../../media/misc/file-text.svg" alt="download PDF"> </a>
                 </div>
             </div>
 
