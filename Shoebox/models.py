@@ -66,6 +66,18 @@ class Shoebox(models.Model):
     def get_comments_count(self):
         return len(self.get_comments())
 
+    def get_box_rating(self):
+        ratings = Comment.objects.filter(shoebox_id=self.id)
+        overallrate = 0
+        divisor = 0
+        for rating in ratings:
+            overallrate += rating.rating
+            divisor += 1
+        if len(ratings) is 0:
+            return 0
+        overallrate /= divisor
+        return overallrate
+
     def __str__(self):
         return "Name: " + self.name + " Price: " + str(self.price) + " Brand " + self.brand + " Description: " \
                + self.description + " Flute Type: " + self.flute_type + " Flute Layers: " + self.flute_layers \
@@ -129,7 +141,7 @@ class Comment(models.Model):
         return self.get_comment_prefix() + ' (' + self.user.username + ')'
 
     def __repr__(self):
-        return self.get_comment_prefix() + ' (' + self.user.username + '/' + str(self.timestamp) + ')' +\
+        return self.get_comment_prefix() + ' (' + self.user.username + '/' + str(self.timestamp) + ')' + \
                'shoeboxid = ' + str(self.shoebox_id)
 
 

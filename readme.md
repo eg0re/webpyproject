@@ -9,7 +9,9 @@
 
 ## Suchfunktion
 
-- [ ] Suchen nach Produkt-Namen, Produkt-Beschreibung, Bewertungs-Sterne
+- [x] Suchen nach Produkt-Namen
+- [x] Produkt-Beschreibung
+- [ ] Bewertungs-Sterne
 
 ## Kunden-Service-Portal
 
@@ -20,12 +22,14 @@
 
 ## Produkt-Bewertungen
 
-- [ ] Text plus Sterne (1 bis 5 Sterne), eine Bewertung pro Benutzer proProdukt
-- [ ] Bewertung hilfreich/nicht hilfreich markieren, entweder hilfreich odernicht hilfreich pro Benutzer pro Bewertung
+- [x] Text plus Sterne (1 bis 5 Sterne)
+- [x] eine Bewertung pro Benutzer pro Produkt
+- [x] Bewertung hilfreich/nicht hilfreich markieren, entweder hilfreich oder nicht hilfreich
+- [ ] pro Benutzer pro Bewertung
 - [ ] Benutzer kann unangebrachte Bewertung melden (reportinappropriate review)
 
 ## Produkt-Bewertungen von Kunden-Service deaktivieren / löschen
-- [ ] Kunden-Service darf Bewertungen deaktivieren / löschenDies kann je nach Entwurf unterschiedlich realisiert sein:
+- [ ] Kunden-Service darf Bewertungen deaktivieren / löschen. Dies kann je nach Entwurf unterschiedlich realisiert sein:
 	- [ ] Möglichkeit 1: Eine Webseite beim Kunden-Service-Portal
 	- [ ] Möglichkeit 2: Bleiben bei der gleichen Webseite wie ein Kunde,aber Kunden-Service sieht zusätzliche Buttons zum Deaktivieren /Löschen
 
