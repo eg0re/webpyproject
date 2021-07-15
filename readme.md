@@ -25,7 +25,7 @@
 - [x] Text plus Sterne (1 bis 5 Sterne)
 - [x] eine Bewertung pro Benutzer pro Produkt
 - [x] Bewertung hilfreich/nicht hilfreich markieren, entweder hilfreich oder nicht hilfreich
-- [ ] pro Benutzer pro Bewertung
+- [x] pro Benutzer pro Bewertung
 - [ ] Benutzer kann unangebrachte Bewertung melden (reportinappropriate review)
 
 ## Produkt-Bewertungen von Kunden-Service deaktivieren / löschen
