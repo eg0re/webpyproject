@@ -7,13 +7,13 @@
 
 {% block title %}Users list{% endblock %}
 
-{% block content %}
-<h2>Users list</h2>
-<ul>
-    {% for myuser in all_myusers %}
-        {{ myuser.user.username }}<br>
-        <img src="{{ myuser.profile_picture.url }}" height="150" width="150"><br>
-        <br>
-    {% endfor %}
-</ul>
+{% block logged_in_content %}
+    <h2>Users list</h2>
+    <ul class="user_list">
+        {% for myuser in all_myusers %}
+            <p class="user_name">{{ myuser.user.username }}</p>
+            <img class="user_image" src="{{ myuser.profile_picture.url }}" height="150" width="150" alt="a"><br>
+            <br>
+        {% endfor %}
+    </ul>
 {% endblock %}

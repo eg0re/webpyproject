@@ -137,10 +137,10 @@ class Comment(models.Model):
                             )
 
     def __str__(self):
-        return self.get_comment_prefix() + ' (' + self.user.username + ')'
+        return self.get_comment_prefix() + ' (' + self.user.user.username + ')'
 
     def __repr__(self):
-        return self.get_comment_prefix() + ' (' + self.user.username + '/' + str(self.timestamp) + ')' + \
+        return self.get_comment_prefix() + ' (' + self.user.user.username + '/' + str(self.timestamp) + ')' + \
                'shoeboxid = ' + str(self.shoebox_id)
 
 
@@ -159,4 +159,4 @@ class Vote(models.Model):
     shoebox = models.ForeignKey(Shoebox, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.up_or_down + ' on ' + self.comment.name + ' by ' + self.user.username
+        return self.up_or_down + ' on ' + self.comment.name + ' by ' + self.user.user.username

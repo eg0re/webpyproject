@@ -32,7 +32,8 @@ class SearchForm(forms.ModelForm):
 
     description = forms.CharField(required=False)
     name = forms.CharField(required=False)
+    stars = forms.IntegerField(min_value=0, max_value=5, required=False)
 
     class Meta:
         model = Shoebox
-        fields = ['name', 'description']
+        fields = ['name', 'description', 'stars']

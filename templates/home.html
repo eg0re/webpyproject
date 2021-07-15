@@ -1,13 +1,22 @@
-{%  extends "base.html" %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock %}
 
 {% block title %}MyBox{% endblock %}
 
-{% block content %}
-    {%  if user.is_authenticated %}
-        <p>Hi {{ user.username }}</p>
-        <a href="{% url 'logout' %}">logout</a>
+    {% if user.is_authenticated %}
+        {% block logged_in_content %}
+            <div class="login-notify">You are already logged in!</div>
+        {% endblock %}
     {% else %}
-        <p>You are not logged in</p>
-        <a href="{% url 'login' %}">login</a>
+        {% block not_logged_in_content %}
+            <div class="login-notify">You are not logged in!</div>
+        {% endblock %}
     {% endif %}
+
+{% block content %}
+
 {% endblock %}

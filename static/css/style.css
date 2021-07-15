@@ -323,3 +323,25 @@ footer {
 #search_form p input {
     margin-top: 5px;
 }
+
+.user_list {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    margin-top: 0;
+}
+
+.user_name {
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.user_image {
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+.login-notify {
+    margin: 20px 0px;
+}

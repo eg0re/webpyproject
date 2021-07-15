@@ -20,7 +20,7 @@
                         <p class="header-user-name">{{ user.username }}</p>
                         <a class="header-login-logout" href="{% url 'logout' %}">Logout</a>
                     </div>
-                    <div class="avatar-small"></div>
+                    <img class="avatar-small" src="{{ myuser_get_profile_path }}">
                 </div>
             {% endblock %}
         {% else %}

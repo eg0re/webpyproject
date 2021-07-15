@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, DeleteView
+from Useradmin.models import MyUser, get_myuser_from_user
 from .forms import ShoeboxForm, CommentForm, SearchForm
 from .models import Shoebox, Comment
 import io
@@ -14,11 +15,35 @@ class ShoeboxListView(ListView):
     context_object_name = 'all_the_boxes'
     template_name = 'box-list.html'
 
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        myuser_get_profile_path = None
+        if user.is_authenticated:  # Anonymous user cannot call has_birthday_today()
+            myuser = get_myuser_from_user(user)
+            if myuser is not None:
+                myuser_get_profile_path = myuser.get_profile_path()
+
+        context = super(ShoeboxListView, self).get_context_data(**kwargs)
+        context['myuser_get_profile_path'] = myuser_get_profile_path
+        return context
+
 
 class ShoeboxDetailView(DetailView):
     model = Shoebox
     context_object_name = 'specific_shoebox'
     template_name = 'box-detail.html'
+
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        myuser_get_profile_path = None
+        if user.is_authenticated:  # Anonymous user cannot call has_birthday_today()
+            myuser = get_myuser_from_user(user)
+            if myuser is not None:
+                myuser_get_profile_path = myuser.get_profile_path()
+
+        context = super(ShoeboxDetailView, self).get_context_data(**kwargs)
+        context['myuser_get_profile_path'] = myuser_get_profile_path
+        return context
 
 
 def shoebox_detail(request, **kwargs):
@@ -28,11 +53,12 @@ def shoebox_detail(request, **kwargs):
     comments = Comment.objects.filter(shoebox_id=box_id)
 
     if request.method == 'POST':
+        user = MyUser.objects.get(user=request.user)
         form = CommentForm(request.POST)
-        form.instance.user = request.user
+        form.instance.user = user
         form.instance.shoebox = shoebox
 
-        user_in_comments = comments.filter(user_id=request.user)
+        user_in_comments = comments.filter(user_id=user)
 
         if user_in_comments.exists():
             messages.info(request, 'You already reviewed this box!')
@@ -47,9 +73,19 @@ def shoebox_detail(request, **kwargs):
         comments = None
         print("keine Kommentare vorhanden")
 
+    ###
+    user = request.user
+    myuser_get_profile_path = None
+    if user.is_authenticated:  # Anonymous user cannot call has_birthday_today()
+        myuser = get_myuser_from_user(user)
+        if myuser is not None:
+            myuser_get_profile_path = myuser.get_profile_path()
+    ###
+
     context = {'specific_shoebox': shoebox,
                'comments_specific_shoebox': comments,
-               'comment_form': CommentForm}
+               'comment_form': CommentForm,
+               'myuser_get_profile_path': myuser_get_profile_path}
     return render(request, 'box-detail.html', context)
 
 
@@ -65,8 +101,17 @@ def shoebox_create(request):
         return redirect('box-list')
 
     else:
+        ###
+        user = request.user
+        myuser_get_profile_path = None
+        if user.is_authenticated:  # Anonymous user cannot call has_birthday_today()
+            myuser = get_myuser_from_user(user)
+            if myuser is not None:
+                myuser_get_profile_path = myuser.get_profile_path()
+        ###
         form = ShoeboxForm()
-        context = {'form': form}
+        context = {'form': form,
+                   'myuser_get_profile_path': myuser_get_profile_path}
         return render(request, 'box-create.html', context)
 
 
@@ -75,10 +120,23 @@ class ShoeboxDeleteView(DeleteView):
     template_name = 'box-delete-confirm.html'
     success_url = "/"
 
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        myuser_get_profile_path = None
+        if user.is_authenticated:  # Anonymous user cannot call has_birthday_today()
+            myuser = get_myuser_from_user(user)
+            if myuser is not None:
+                myuser_get_profile_path = myuser.get_profile_path()
+
+        context = super(ShoeboxDeleteView, self).get_context_data(**kwargs)
+        context['myuser_get_profile_path'] = myuser_get_profile_path
+        return context
+
 
 def vote(request, pk: str, up_or_down: str):
     comment = Comment.objects.get(id=int(pk))
-    user = request.user
+    print(request)
+    user = MyUser.objects.get(user=request.user)
     comment.vote(user, up_or_down)
     return redirect('box-detail', bpk=comment.shoebox_id)
 
@@ -108,6 +166,14 @@ def pdfdl(request, pk: str):
 
 
 def box_search(request):
+    ###
+    user = request.user
+    myuser_get_profile_path = None
+    if user.is_authenticated:  # Anonymous user cannot call has_birthday_today()
+        myuser = get_myuser_from_user(user)
+        if myuser is not None:
+            myuser_get_profile_path = myuser.get_profile_path()
+    ###
     if request.method == "POST":
         search_string_name = request.POST['name']
         boxes_found = Shoebox.objects.filter(name__contains=search_string_name)
@@ -116,12 +182,23 @@ def box_search(request):
         if search_string_description:
             boxes_found = boxes_found.filter(description__contains=search_string_description)
 
+        search_stars = request.POST['stars']
+        if search_stars:
+            newarr = []
+            for box in boxes_found:
+                rating = box.get_box_rating()
+                if(rating >= float(search_stars)):
+                    newarr.append(box)
+
+            boxes_found = newarr
+
         form = SearchForm()
         context = {'form': form,
                    'boxes_found': boxes_found,
-                   'show_results': True}
+                   'show_results': True,
+                   'myuser_get_profile_path': myuser_get_profile_path}
         return render(request, 'box-search.html', context)
     else:
         form = SearchForm()
-        context = {"form": form, "show_results": False}
+        context = {"form": form, "show_results": False, 'myuser_get_profile_path': myuser_get_profile_path}
         return render(request, "box-search.html", context)
