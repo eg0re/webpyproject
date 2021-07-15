@@ -123,6 +123,8 @@ footer {
 
 .header-user-name {
     font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 0px;
 }
 
 .header-login-logout {
