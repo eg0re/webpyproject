@@ -97,6 +97,7 @@ class Comment(models.Model):
     text = models.TextField(max_length=500)
     rating = models.IntegerField(choices=RATINGS,
                                  default='5')
+    inappropriate = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     shoebox = models.ForeignKey(Shoebox, on_delete=models.CASCADE)
