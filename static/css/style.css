@@ -16,6 +16,24 @@ h2 {
     font-size: 36pt;
 }
 
+.marker {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 36pt;
+}
+
+.final-price {
+    transform: rotate(70deg);
+    -ms-transform: rotate(70deg);
+    -webkit-transform: rotate(5deg);
+    display: inline-block;
+    font-size: 26pt;
+    margin-left: 1rem;
+    font-weight: bold;
+    background: #8cce3c;
+    padding: 0rem 1rem 0 1rem;
+    box-shadow: 3px 4px 1px #0000000d;
+}
+
 body {
     background: white;
     margin: 0;
@@ -346,4 +364,22 @@ footer {
 
 .login-notify {
     margin: 20px 0px;
+}
+
+.shopping {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: fixed;
+    top: 7.5rem;
+    right: 1rem;
+}
+
+.shopping > img {
+    filter: invert(100%);
+}
+
+.basket-image {
+    height: 10rem;
 }

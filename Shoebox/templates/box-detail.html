@@ -7,8 +7,6 @@
 
 {% block title %}{{ specific_shoebox.name }}{% endblock %}
 
-{% block header-title %}Create a Box{% endblock %}
-
 {% block logged_in_content %}
     <div class="detail-wrapper">
         <img src="/media/{{ specific_shoebox.image }}" class="detail-article-image" alt="shoebox image">
@@ -23,7 +21,7 @@
                     <div class="article-price-detail">{{ specific_shoebox.price }}€</div>
                 </div>
                 <div>
-                    <button class="add-item button">+</button>
+                    <a href="../../basket/{{ specific_shoebox.id }}" class="add-item button">+</a>
                     <!-- document icon from https://feathericons.com/ 14.07.21 -->
                     <a href="{% url 'pdfdl' specific_shoebox.id %}" class="notice button" title="download pdf"><img src="../../media/misc/file-text.svg" alt="download PDF"> </a>
                 </div>

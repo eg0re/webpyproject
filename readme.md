@@ -39,10 +39,12 @@
 
 ## Einkaufswagen
 
-- [ ] Produkte und Anzahl in einem Einkaufswagen speichern
-- [ ] Funktionalität zum Bezahlen sind nicht zu implementieren
+- [x] Produkte und Anzahl in einem Einkaufswagen speichern
+- [x] Funktionalität zum Bezahlen sind nicht zu implementieren
 
 ## Sonstiges
 
-- [ ] Professionell aussehen, z.B. css, Grafik
+- [x] Professionell aussehen, z.B. css, Grafik
 - [x] Ausreichende Daten, um die Website sinnvoll darzustellen, zwei Benutzer plus zwei Produkte reicht es nicht!
+- [ ] Article-Cards sehen blöd aus wenn der Titel einer Box zu lang ist. (siehe grüne Box)
+- [ ] Online Hosten

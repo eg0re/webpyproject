@@ -5,6 +5,7 @@ from Useradmin.models import MyUser
 
 
 class Shoebox(models.Model):
+
     # Wie "dick" die Wellpappe ist
     FLUTE_TYPE = [
         ('A', 'Grobwelle'),

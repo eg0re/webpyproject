@@ -5,6 +5,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/media/misc/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/media/misc/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/media/misc/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     {% block css %}{% endblock %}
     <title>{% block title %}Base Titel{% endblock %}</title>
 </head>
@@ -14,6 +18,9 @@
         <a href={% url "box_search" %} class="search">Search for a shoebox</a>
         {% if user.is_authenticated %}
             {% block logged_in_content_header %}
+                <a class="btn shopping add-item" href="{% url 'mybasket' %}">
+                    <img src="/media/misc/shopping-cart.svg">
+                </a>
                 <div class="header-user-bla">
                     <a class="btn" href="{% url 'box-create' %}">add box</a>
                     <div class="fc">

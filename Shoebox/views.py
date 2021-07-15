@@ -19,6 +19,7 @@ class ShoeboxListView(ListView):
     def get_context_data(self, **kwargs):
         user = self.request.user
         myuser_get_profile_path = None
+        mycart_get_size = None
         if user.is_authenticated:  # Anonymous user cannot call has_birthday_today()
             myuser = get_myuser_from_user(user)
             if myuser is not None:
@@ -26,6 +27,7 @@ class ShoeboxListView(ListView):
 
         context = super(ShoeboxListView, self).get_context_data(**kwargs)
         context['myuser_get_profile_path'] = myuser_get_profile_path
+        context['mycart_get_size'] = mycart_get_size
         return context
 
 
@@ -149,9 +151,11 @@ def vote(request, commentid: str, up_or_down: str):
     allvotesfromcomment = Vote.objects.filter(comment_id=commentid)
     votefromuser = allvotesfromcomment.filter(user_id=voter.id)
     if comment.user_id is voter.id:
+        messages.info(request, 'Don\'t vote for yourself!')
         print("user can't selfvote")
         return redirect('box-detail', bpk=comment.shoebox_id)
     if votefromuser:
+        messages.info(request, 'You already voted for this review!')
         print("user already voted this comment")
         return redirect('box-detail', bpk=comment.shoebox_id)
     print("user voted")

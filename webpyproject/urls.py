@@ -25,7 +25,8 @@ urlpatterns = [
     path('', include('Shoebox.urls')),
     path('home/', HomeView.as_view(template_name='home.html'), name='home'),
     path('useradmin/', include('Useradmin.urls')),
-    path('useradmin/', include('django.contrib.auth.urls'))
+    path('useradmin/', include('django.contrib.auth.urls')),
+    path('shoppingcart/', include('Shoppingcart.urls')),
 ]
 
 if settings.DEBUG:

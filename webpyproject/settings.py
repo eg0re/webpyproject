@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Shoebox.apps.ShoeboxConfig',
     'Useradmin.apps.UseradminConfig',
+    'Shoppingcart.apps.ShoppingcartConfig',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{%  load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block title %}Shopping cart{% endblock %}
+
+{% block logged_in_content %}
+<h2>Shopping cart</h2>
+    {% if shopping_cart_is_empty %}
+        Your shopping cart is empty.<br>
+    {% else %}
+        {% for item in shopping_cart %}
+            <img src="../../media/{{ item.box.image }}" class="basket-image">
+            {{ item.box.name }}<br>
+            {{ item.box.price }} € x{{ item.quantity }}<br>
+            <br>
+        {% endfor %}
+
+        <p><span class="marker">Total amount:</span> <span class="final-price">{{ total }} €</span></p>
+
+        <br><br>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" name="empty">Empty the shopping cart</button><br>
+            <button type="submit" name="pay">Pay with credit card</button>
+        </form>
+    {% endif %}
+
+    <br>
+    <a href="{% url 'box-list' %}">Keep shopping some boxes</a>
+{% endblock %}
+
+{% block not_logged_in_content %}
+    Pls log in thanks.
+{% endblock %}
