@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, DeleteView
 from Useradmin.models import MyUser, get_myuser_from_user
 from .forms import ShoeboxForm, CommentForm, SearchForm
-from .models import Shoebox, Comment
+from .models import Shoebox, Comment, Vote
 import io
 from django.http import FileResponse
 from reportlab.pdfgen import canvas
@@ -133,17 +133,26 @@ class ShoeboxDeleteView(DeleteView):
         return context
 
 
-def vote(request, pk: str, up_or_down: str):
-    comment = Comment.objects.get(id=int(pk))
-    print(request)
-    user = MyUser.objects.get(user=request.user)
-    comment.vote(user, up_or_down)
+def vote(request, commentid: str, up_or_down: str):
+    comment = Comment.objects.get(id=int(commentid))
+    voter = MyUser.objects.get(user=request.user)
+    allvotesfromcomment = Vote.objects.filter(comment_id=commentid)
+    votefromuser = allvotesfromcomment.filter(user_id=voter.id)
+    if comment.user_id is voter.id:
+        print("user can't selfvote")
+        return redirect('box-detail', bpk=comment.shoebox_id)
+    if votefromuser:
+        print("user already voted this comment")
+        return redirect('box-detail', bpk=comment.shoebox_id)
+    print("user voted")
+    comment.vote(voter, up_or_down)
     return redirect('box-detail', bpk=comment.shoebox_id)
 
 
 def pdfdl(request, pk: str):
     shoebox = Shoebox.objects.filter(id=pk)[0]
 
+    # https://docs.djangoproject.com/en/3.2/howto/outputting-pdf/
     # Create a file-like buffer to receive PDF data.
     buffer = io.BytesIO()
 

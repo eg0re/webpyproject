@@ -24,6 +24,9 @@ class MyUser(models.Model):
     def get_profile_path(self):
         return self.profile_picture.url
 
+    def get_username(self):
+        return self.user.username
+
     def execute_after_login(self):
         print(self.__str__())
         self.save()

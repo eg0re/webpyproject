@@ -64,10 +64,9 @@
 
                 <div>
                     <div class="reviewer-info">
-                        <!-- TODO: implement user avatar -->
-                        <div class="avatar-small"></div>
+                        <img class="avatar-small" src="{{ comment.get_user_profile_picture }}">
                         <div>
-                            <p>{{ comment.user.username }}</p>
+                            <p>{{ comment.get_username }}</p>
                             <p>{{ comment.timestamp }}</p>
                             <div class="stars-wrapper">
                                 {% with ''|center:comment.rating as range %}
@@ -133,10 +132,9 @@
 
                 <div>
                     <div class="reviewer-info">
-                        <!-- TODO: implement user avatar -->
-                        <div class="avatar-small"></div>
+                        <img class="avatar-small" src="{{ comment.get_user_profile_picture }}">
                         <div>
-                            <p>{{ comment.user.username }}</p>
+                            <p>{{ comment.get_username }}</p>
                             <p>{{ comment.timestamp }}</p>
                             <div class="stars-wrapper">
                                 {% with ''|center:comment.rating as range %}

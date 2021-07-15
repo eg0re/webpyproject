@@ -125,6 +125,12 @@ class Comment(models.Model):
     def get_downvotes_count(self):
         return len(self.get_downvotes())
 
+    def get_user_profile_picture(self):
+        return MyUser.get_profile_path(self.user)
+
+    def get_username(self):
+        return MyUser.get_username(self.user)
+
     def vote(self, user, up_or_down):
         u_or_d = 'U'
         if up_or_down == 'down':
