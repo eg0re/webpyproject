@@ -9,7 +9,7 @@
 
 {% block logged_in_content %}
     <h2>Add Box</h2>
-        <form class="add-form" method="POST">
+        <form class="add-form" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_table }}
             <button type="submit">Add Box</button>

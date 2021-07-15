@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
+from django.views import generic
 from django.views.generic import CreateView, DetailView, ListView, DeleteView
 from Useradmin.models import MyUser, get_myuser_from_user
 from .forms import ShoeboxForm, CommentForm, SearchForm
@@ -89,31 +90,40 @@ def shoebox_detail(request, **kwargs):
     return render(request, 'box-detail.html', context)
 
 
-def shoebox_create(request):
-    if request.method == 'POST':
-        form = ShoeboxForm(request.POST)
-        form.instance.user = request.user
-        if form.is_valid():
-            form.save()
-        else:
-            pass
+class ShoeboxCreate(generic.CreateView):
+    form_class = ShoeboxForm
+    success_url = reverse_lazy('box-list')
+    template_name = 'box-create.html'
 
-        return redirect('box-list')
-
-    else:
-        ###
-        user = request.user
+    def get_context_data(self, **kwargs):
+        user = self.request.user
         myuser_get_profile_path = None
         if user.is_authenticated:  # Anonymous user cannot call has_birthday_today()
             myuser = get_myuser_from_user(user)
             if myuser is not None:
                 myuser_get_profile_path = myuser.get_profile_path()
-        ###
-        form = ShoeboxForm()
-        context = {'form': form,
-                   'myuser_get_profile_path': myuser_get_profile_path}
-        return render(request, 'box-create.html', context)
 
+        context = super(ShoeboxCreate, self).get_context_data(**kwargs)
+        context['myuser_get_profile_path'] = myuser_get_profile_path
+        return context
+
+    def form_valid(self, form):
+        print("VALID")
+        data = form.cleaned_data
+        shoebox = Shoebox.objects.create(brand=data["brand"],
+                                        description=data["description"],
+                                        flute_layers=data["flute_layers"],
+                                        flute_type=data["flute_type"],
+                                        height=data["height"],
+                                        image=data["image"],
+                                        length=data["length"],
+                                        liner_type=data["liner_type"],
+                                        name=data["name"],
+                                        price=data["price"],
+                                        width=data["width"],
+                                      )
+        print(shoebox)
+        return redirect("box-list")
 
 class ShoeboxDeleteView(DeleteView):
     model = Shoebox
