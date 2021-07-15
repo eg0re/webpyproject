@@ -2,7 +2,7 @@
 ## Ein Online-Shop
 - [x] Freie Auswahl von Produkten
 - [x] Produkt mit Name, Text-Beschreibung, Bild(ern), Preis
-- [ ] Produkt-Info-PDF zum Herunterladen (es geht um die Funktionalität zum Herunterladen, PDFs brauchen nicht ausführlich sein)
+- [x] Produkt-Info-PDF zum Herunterladen (es geht um die Funktionalität zum Herunterladen, PDFs brauchen nicht ausführlich sein)
 
 ## Benutzer-Profil
 - [ ] Profile-Picture
@@ -45,4 +45,4 @@
 ## Sonstiges
 
 - [ ] Professionell aussehen, z.B. css, Grafik
-- [ ] Ausreichende Daten, um die Website sinnvoll darzustellen, zweiBenutzer plus zwei Produkte reicht es nicht!
+- [ ] Ausreichende Daten, um die Website sinnvoll darzustellen, zwei Benutzer plus zwei Produkte reicht es nicht!
