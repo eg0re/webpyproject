@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'Shoebox.apps.ShoeboxConfig',
     'Useradmin.apps.UseradminConfig',
     'Shoppingcart.apps.ShoppingcartConfig',
+    'CustomerService.apps.CustomerserviceConfig',
 ]
 
 MIDDLEWARE = [

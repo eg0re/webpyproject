@@ -100,7 +100,7 @@ class ShoeboxCreate(generic.CreateView):
     def get_context_data(self, **kwargs):
         user = self.request.user
         myuser_get_profile_path = None
-        if user.is_authenticated:  # Anonymous user cannot call has_birthday_today()
+        if user.is_authenticated:
             myuser = get_myuser_from_user(user)
             if myuser is not None:
                 myuser_get_profile_path = myuser.get_profile_path()
