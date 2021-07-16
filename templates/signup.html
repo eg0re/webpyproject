@@ -9,7 +9,7 @@
 
 {% block not_logged_in_content %}
     <h2>Sign up</h2>
-    <form id="signup" method="post" enctype="multipart/form-data">
+    <form class="login-form" id="signup" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button class="delete_submit" type="submit">SIGN UP</button>
