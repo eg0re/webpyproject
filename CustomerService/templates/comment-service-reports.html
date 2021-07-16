@@ -1,0 +1,24 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}Comment reports{% endblock %}
+
+{% block logged_in_content %}
+<h2>Comment reports</h2>
+    {% if not can_delete %}
+        You are not authorized to delete comments.<br><br>
+    {% endif %}
+
+    {% for comment in comments %}
+        <b class="author_delete">{{ comment.user.user.username }}</b>
+        <span class="author_on">{{ comment.timestamp }}</span><br>
+        <span>{{ comment.text }}</span>
+        <br>
+        {% if can_delete %}
+            {% csrf_token %}
+            <a href="../delete/{{ comment.id }}/" class="delete_submit">OPEN DELETE PAGE</a>
+        {% endif %}
+        <br>
+    {% endfor %}
+
+{% endblock %}

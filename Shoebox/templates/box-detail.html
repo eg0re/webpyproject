@@ -38,11 +38,12 @@
 
     <h2>Reviews</h2>
     <section class="reviews-wrapper">
-        <form method="POST">
+        <form id="comment_form" method="POST">
             {% csrf_token %}
             {{ comment_form.as_p }}
-            <button type="submit">Add Review</button>
+            <button class="delete_submit" type="submit">ADD REVIEW</button>
         </form>
+        <br>
 
         {% if messages %}
             <ul class="messages notice">
@@ -85,8 +86,8 @@
                     <!-- TODO: make real comment remove button and not just a ph -->
                     <!-- TODO: make real comment edit button -->
                     {% if user.is_authenticated %}
-                        <a class="alert btn " href="{% url 'box-create' %}">Im a fake delete comment button</a>
-                        <a class="notice btn" href="{% url 'box-create' %}">Im a fake edit comment button</a>
+                        <a class="alert btn" href="../../service/delete/{{ comment.id }}/">DELETE</a>
+                        <a class="notice btn" href="../../service/edit/{{ comment.id }}/">EDIT</a>
                     {% endif %}
                 </div>
             </article>
@@ -153,8 +154,8 @@
                     <!-- TODO: make real comment remove button and not just a ph -->
                     <!-- TODO: make real comment edit button -->
                     {% if user.is_authenticated %}
-                        <a class="alert btn " href="{% url 'box-create' %}">Im a fake delete comment button</a>
-                        <a class="notice btn" href="{% url 'box-create' %}">Im a fake edit comment button</a>
+                        <a href="../../service/delete/{{ comment.id }}/">DELETE</a>
+                        <a href="../../service/edit/{{ comment.id }}/">EDIT</a>
                     {% endif %}
                 </div>
             </article>

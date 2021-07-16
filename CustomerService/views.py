@@ -23,6 +23,8 @@ class CommentDeleteView(ListView):
             myuser = get_myuser_from_user(user)
             can_delete = myuser.is_staff()
             myuser_get_profile_path = myuser.get_profile_path()
+            if comment.user == myuser:
+                can_delete = True
 
         context['can_delete'] = can_delete
         context['myuser_get_profile_path'] = myuser_get_profile_path
@@ -61,11 +63,13 @@ def comment_edit(request, pk: str):
         can_delete = False
         user = request.user
         myuser_get_profile_path = None
+        comment = Comment.objects.get(id=comment_id)
         if not user.is_anonymous:
             myuser = get_myuser_from_user(user)
             can_delete = myuser.is_staff()
+            if comment.user == myuser:
+                can_delete = True
             myuser_get_profile_path = myuser.get_profile_path()
-        comment = Comment.objects.get(id=comment_id)
         form = CommentEditForm(request.POST or None, instance=comment)
         context = {'form': form,
                    'can_delete': can_delete,
@@ -76,5 +80,25 @@ def comment_edit(request, pk: str):
         return render(request, 'comment-service-edit.html', context)
 
 
+class CommentReportView(ListView):
+    model = Comment
+    context_object_name = 'all_the_comments'
+    template_name = 'comment-service-reports.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(CommentReportView, self).get_context_data(**kwargs)
+        can_delete = False
+        user = self.request.user
+        myuser_get_profile_path = None
+        comments = Comment.objects.filter(inappropriate=True)
+        if not user.is_anonymous:
+            myuser = get_myuser_from_user(user)
+            can_delete = myuser.is_staff()
+            myuser_get_profile_path = myuser.get_profile_path()
+
+        context['can_delete'] = can_delete
+        context['myuser_get_profile_path'] = myuser_get_profile_path
+        context['myuser'] = myuser
+        context['comments'] = comments
+        return context
 

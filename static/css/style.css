@@ -486,3 +486,29 @@ footer {
 #comment_edit_form_service p textarea {
     margin-top: 5px;
 }
+
+#comment_form textarea {
+    width: 100%;
+}
+
+#comment_form {
+    text-align: center;
+}
+
+#signup {
+    text-align: center;
+}
+
+#signup p label:after {
+    content: "\A";
+    white-space: pre;
+}
+
+#signup p input {
+    margin-top: 5px;
+}
+
+#signup p span {
+    display: none;
+}
+
