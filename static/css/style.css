@@ -40,6 +40,16 @@ h2 {
     font-size: 36pt;
 }
 
+h3 {
+    margin: 0;
+    font-size: 22pt;
+}
+
+.shopping-cart-ul {
+    list-style: none;
+    padding: 0;
+}
+
 .marker {
     font-family: 'Permanent Marker', cursive;
     font-size: 36pt;
@@ -199,7 +209,7 @@ footer {
     color: white;
     padding: 1rem;
     border-radius: 5px;
-    box-shadow: #0000002e 1px 2px 2px 0px;
+    border: 1px solid #00000047;
 }
 
 .alert {
@@ -237,9 +247,20 @@ footer {
     font-weight: bold;
     font-size: 26pt;
     border-radius: 5px;
-    box-shadow: #0000002e 1px 2px 2px 0px;
-    border: none;
     cursor: pointer;
+}
+
+.paybuttons-wrapper {
+    display: flex;
+    width: 50%;
+    justify-content: space-evenly;
+    padding: 2rem 0 6rem 0;
+}
+
+.paybuttons-wrapper > button {
+    width: 30%;
+    color: black;
+    cursor:pointer;
 }
 
 .add-item {
@@ -252,6 +273,10 @@ footer {
     align-items: center;
 }
 
+.ais {
+    align-items: flex-start;
+}
+
 .fr > * {
     padding: 1rem;
 }
@@ -261,6 +286,14 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-items: center;
+}
+
+.hw {
+    width: 50%;
+}
+
+.la {
+    text-align: left;
 }
 
 .reviews-wrapper {

@@ -12,19 +12,31 @@
         Your shopping cart is empty.<br>
     {% else %}
         {% for item in shopping_cart %}
-            <img src="../../media/{{ item.box.image }}" class="basket-image">
-            {{ item.box.name }}<br>
-            {{ item.box.price }} € x{{ item.quantity }}<br>
-            <br>
+            <article class="article fr ais hw">
+                <img src="../../media/{{ item.box.image }}" class="basket-image">
+                <section>
+                    <h3>{{ item.box.name }}</h3>
+                    <ul class="shopping-cart-ul">
+                        <li>brand: {{ item.box.brand }}</li>
+                        <li>size: {{ item.box.width }} x {{ specific_shoebox.height }}
+                            x {{ item.box.length }} cm
+                        </li>
+                        <li>layers: {{ item.box.get_flute_layers_display }}</li>
+                        <li>flute type: {{ item.box.get_flute_type_display }}</li>
+                        <li>liner type: {{ item.box.get_liner_type_display }}</li>
+                    </ul>
+                    <aside class="final-price">{{ item.box.price }} € x{{ item.quantity }}</aside>
+                </section>
+            </article>
         {% endfor %}
 
         <p><span class="marker">Total amount:</span> <span class="final-price">{{ total }} €</span></p>
 
         <br><br>
-        <form method="POST">
+        <form method="POST" class="paybuttons-wrapper">
             {% csrf_token %}
-            <button type="submit" name="empty">Empty the shopping cart</button><br>
-            <button type="submit" name="pay">Pay with credit card</button>
+            <button class="btn notice" type="submit" name="empty">Empty the shopping cart</button><br>
+            <button class="btn add-item" type="submit" name="pay">Pay with credit card</button>
         </form>
     {% endif %}
 

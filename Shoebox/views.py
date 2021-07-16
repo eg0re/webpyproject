@@ -175,7 +175,10 @@ def pdfdl(request, pk: str):
 
     # Draw things on the PDF. Here's where the PDF generation happens.
     # See the ReportLab documentation for the full list of functionality.
-    p.drawString(100, 100, "Box Name: " + shoebox.name)
+    p.drawString(0, 100, "Box Name: " + shoebox.name)
+    p.drawString(0, 200, "Box Price: " + str(shoebox.price))
+    p.drawString(0, 300, "Box Description: " + shoebox.description)
+    p.drawImage("media/" + str(shoebox.image), 0, 400, 200, 100)
 
     # Close the PDF object cleanly, and we're done.
     p.showPage()

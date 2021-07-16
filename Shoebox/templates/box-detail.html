@@ -14,7 +14,7 @@
             <div class="article-name">{{ specific_shoebox.name }}</div>
             <div class="article-details-wrapper">
                 <div>
-                    <div class="article-price-detail">{{ specific_shoebox.price }}€</div>
+                    <div class="article-price la">{{ specific_shoebox.price }}€</div>
                     <ul>
                         <li>brand: {{ specific_shoebox.brand }}</li>
                         <li>size: {{ specific_shoebox.width }} x {{ specific_shoebox.height }}
@@ -26,7 +26,7 @@
                     </ul>
                 </div>
                 <div>
-                    <a href="../../basket/{{ specific_shoebox.id }}" class="add-item button">+</a>
+                    <a href="../../basket/{{ specific_shoebox.id }}" class="add-item button btn">+</a>
                     <!-- document icon from https://feathericons.com/ 14.07.21 -->
                     <a href="{% url 'pdfdl' specific_shoebox.id %}" class="notice button" title="download pdf"><img src="../../media/misc/file-text.svg" alt="download PDF"> </a>
                 </div>
