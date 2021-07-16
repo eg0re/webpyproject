@@ -15,10 +15,10 @@
 
 ## Kunden-Service-Portal
 
-- [ ] Zusätzlich zum Django-Admin-Portal
+- [x] Zusätzlich zum Django-Admin-Portal
 - [ ] Produkt mit Bild(ern) und PDF einfügen
 - [ ] Nur Kunden-Service darf Produkt-Angaben ändern
-- [ ] Um Kunden-Service-Personal einzurichten, man darf einfach dasDjango-Admin-Portal benutzen
+- [x] Um Kunden-Service-Personal einzurichten, man darf einfach dasDjango-Admin-Portal benutzen
 
 ## Produkt-Bewertungen
 
@@ -29,13 +29,13 @@
 - [ ] Benutzer kann unangebrachte Bewertung melden (reportinappropriate review)
 
 ## Produkt-Bewertungen von Kunden-Service deaktivieren / löschen
-- [ ] Kunden-Service darf Bewertungen deaktivieren / löschen. Dies kann je nach Entwurf unterschiedlich realisiert sein:
-	- [ ] Möglichkeit 1: Eine Webseite beim Kunden-Service-Portal
-	- [ ] Möglichkeit 2: Bleiben bei der gleichen Webseite wie ein Kunde,aber Kunden-Service sieht zusätzliche Buttons zum Deaktivieren /Löschen
+- [x] Kunden-Service darf Bewertungen deaktivieren / löschen. Dies kann je nach Entwurf unterschiedlich realisiert sein:
+	- [x] Möglichkeit 1: Eine Webseite beim Kunden-Service-Portal
+	- [x] Möglichkeit 2: Bleiben bei der gleichen Webseite wie ein Kunde,aber Kunden-Service sieht zusätzliche Buttons zum Deaktivieren /Löschen
 
 ## Produkt-Bewertungen von Kunden ändern / löschen
 
-- [ ] Benutzer darf eigene Bewertungen ändern / löschen
+- [x] Benutzer darf eigene Bewertungen ändern / löschen
 
 ## Einkaufswagen
 
