@@ -14,14 +14,26 @@ def basket(request, **kwargs):
     shoebox = Shoebox.objects.get(id=box_id)
     user = MyUser.objects.get(user=request.user)
     usershoppingcart = ShoppingCart.objects.get(myuser_id=user.id)
-    ShoppingCart.add_item(myuser=user, box=shoebox)
+    cartitem = ShoppingCartItem.objects.filter(box=shoebox).first()
+    if cartitem:
+        cartitem.add_quantity()
+    else:
+        ShoppingCart.add_item(myuser=user, box=shoebox)
     cart = ShoppingCartItem.objects.filter(shopping_cart_id=usershoppingcart.id)
+
+    if 'empty' in request.POST:
+        cart.delete()
+    elif 'pay' in request.POST:
+        return redirect('shopping-cart-pay')
+
+    myuser_get_profile_path = MyUser.get_profile_path(user)
 
     total = 0
     for item in cart:
-        total += item.box.price
+        total += item.box.price * item.quantity
 
     context = {
+        'myuser_get_profile_path': myuser_get_profile_path,
         'shopping_cart': cart,
         'total': total,
     }
@@ -40,11 +52,19 @@ def show_shopping_cart(request):
 
     cart = ShoppingCartItem.objects.filter(shopping_cart_id=usershoppingcart.id)
 
+    if 'empty' in request.POST:
+        cart.delete()
+    elif 'pay' in request.POST:
+        return redirect('shopping-cart-pay')
+
+    myuser_get_profile_path = MyUser.get_profile_path(user)
+
     total = 0
     for item in cart:
         total += item.box.price
 
     context = {
+        'myuser_get_profile_path': myuser_get_profile_path,
         'shopping_cart': cart,
         'total': total,
     }
@@ -58,27 +78,31 @@ def pay(request):
     paid = False
     form = None
 
+    realuser = MyUser.objects.get(user=request.user)
     if request.method == 'POST':
-        myuser = request.user
         form = PaymentForm(request.POST)
-        form.instance.myuser = myuser
+        form.instance.myuser = realuser
         if form.is_valid():
             form.save()
             paid = True
 
             # Empty the shopping cart
-            ShoppingCart.objects.get(myuser=myuser).delete()
+            ShoppingCart.objects.get(myuser=realuser).delete()
         else:
             print(form.errors)
 
     else:  # request.method == 'GET'
-        shopping_carts = ShoppingCart.objects.filter(myuser=request.user)
+        shopping_carts = ShoppingCart.objects.filter(myuser=realuser)
         if shopping_carts:
             shopping_cart = shopping_carts.first()
             shopping_cart_is_empty = False
             form = PaymentForm(initial={'amount': shopping_cart.get_total()})
 
+    myuser_get_profile_path = MyUser.get_profile_path(realuser)
+
     context = {'shopping_cart_is_empty': shopping_cart_is_empty,
+               'myuser_get_profile_path': myuser_get_profile_path,
                'payment_form': form,
-               'paid': paid, }
+               'paid': paid,
+               'shopping_cart': shopping_cart,}
     return render(request, 'pay.html', context)

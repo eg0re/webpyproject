@@ -33,7 +33,7 @@ class ShoppingCart(models.Model):
         total = Decimal(0.0)  # Default without Decimal() would be type float!
         shopping_cart_items = ShoppingCartItem.objects.filter(shopping_cart=self)
         for item in shopping_cart_items:
-            total += item.price * item.quantity
+            total += item.box.price * item.quantity
         return total
 
 
@@ -41,6 +41,13 @@ class ShoppingCartItem(models.Model):
     box = models.ForeignKey(Shoebox, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     shopping_cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
+
+    def add_quantity(self):
+        quantity = ShoppingCartItem.objects.get(box=self.box).quantity
+        temp = quantity + 1
+        self.quantity = temp
+        print(quantity)
+        return self.save()
 
 
 class Payment(models.Model):

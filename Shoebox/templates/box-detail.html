@@ -10,15 +10,20 @@
 {% block logged_in_content %}
     <div class="detail-wrapper">
         <img src="/media/{{ specific_shoebox.image }}" class="detail-article-image" alt="shoebox image">
-        <div class="article-info-small">
+        <div class="article-info-detail">
             <div class="article-name">{{ specific_shoebox.name }}</div>
             <div class="article-details-wrapper">
                 <div>
-                    <div>Marke: {{ specific_shoebox.brand }}</div>
-                    <div>Größe: {{ specific_shoebox.width }} x {{ specific_shoebox.height }}
-                        x {{ specific_shoebox.length }} cm
-                    </div>
                     <div class="article-price-detail">{{ specific_shoebox.price }}€</div>
+                    <ul>
+                        <li>brand: {{ specific_shoebox.brand }}</li>
+                        <li>size: {{ specific_shoebox.width }} x {{ specific_shoebox.height }}
+                            x {{ specific_shoebox.length }} cm
+                        </li>
+                        <li>layers: {{ specific_shoebox.get_flute_layers_display }}</li>
+                        <li>flute type: {{ specific_shoebox.get_flute_type_display }}</li>
+                        <li>liner type: {{ specific_shoebox.get_liner_type_display }}</li>
+                    </ul>
                 </div>
                 <div>
                     <a href="../../basket/{{ specific_shoebox.id }}" class="add-item button">+</a>
@@ -31,7 +36,7 @@
         </div>
     </div>
 
-    <h2>Bewertungen</h2>
+    <h2>Reviews</h2>
     <section class="reviews-wrapper">
         <form method="POST">
             {% csrf_token %}

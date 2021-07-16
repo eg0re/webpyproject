@@ -4,7 +4,31 @@
     -moz-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     -ms-transition: all .2s ease-in-out;
+    animation: fadeInAnimation ease-in-out 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
 }
+
+@keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+}
+
+@keyframes slideDown {
+  0% {
+      transform: translateY(-20%);
+      opacity: 0;
+  }
+  100% {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
 
 a:link {
     text-decoration: none;
@@ -49,6 +73,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 99999;
 }
 
 footer {
@@ -108,9 +133,17 @@ footer {
     margin: 2rem;
     border-radius: 5px;
     box-shadow: #0000002e 1px 2px 2px 0px;
+    animation: slideDown ease-in-out 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
 }
 
 .article-info-small {
+    padding-top: 1rem;
+    width: 25rem;
+}
+
+.article-info-detail {
     padding-top: 1rem;
     width: 100%;
 }
@@ -156,7 +189,7 @@ footer {
 .avatar-small {
     width: 60px;
     height: 60px;
-    background: red;
+    background: white;
     border-radius: 100px;
     margin-right: 1rem;
 }
@@ -382,4 +415,9 @@ footer {
 
 .basket-image {
     height: 10rem;
+}
+
+.article-price-detail {
+    font-weight: bolder;
+    font-size: 24pt;
 }
