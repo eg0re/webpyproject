@@ -13,8 +13,14 @@ def basket(request, **kwargs):
     box_id = kwargs['bpk']
     shoebox = Shoebox.objects.get(id=box_id)
     user = MyUser.objects.get(user=request.user)
-    usershoppingcart = ShoppingCart.objects.get(myuser_id=user.id)
-    cartitem = ShoppingCartItem.objects.filter(box=shoebox).first()
+
+    shopping_carts = ShoppingCart.objects.filter(myuser=user)
+    if shopping_carts:
+        usershoppingcart = shopping_carts.first()
+    else:
+        usershoppingcart = ShoppingCart.objects.create(myuser=user)
+    usershoppingcart = ShoppingCart.objects.get(myuser_id=user.user.id)
+    cartitem = ShoppingCartItem.objects.filter(box=shoebox, shopping_cart_id=usershoppingcart)
     if cartitem:
         cartitem.add_quantity()
     else:
