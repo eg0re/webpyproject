@@ -88,6 +88,7 @@
                     {% if user.is_authenticated %}
                         <a class="alert btn" href="../../service/delete/{{ comment.id }}/">DELETE</a>
                         <a class="notice btn" href="../../service/edit/{{ comment.id }}/">EDIT</a>
+                        <a class="notice btn" href="../../report/{{ comment.id }}/">REPORT</a>
                     {% endif %}
                 </div>
             </article>

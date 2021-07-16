@@ -113,19 +113,20 @@ class ShoeboxCreate(generic.CreateView):
         print("VALID")
         data = form.cleaned_data
         shoebox = Shoebox.objects.create(brand=data["brand"],
-                                        description=data["description"],
-                                        flute_layers=data["flute_layers"],
-                                        flute_type=data["flute_type"],
-                                        height=data["height"],
-                                        image=data["image"],
-                                        length=data["length"],
-                                        liner_type=data["liner_type"],
-                                        name=data["name"],
-                                        price=data["price"],
-                                        width=data["width"],
-                                      )
+                                         description=data["description"],
+                                         flute_layers=data["flute_layers"],
+                                         flute_type=data["flute_type"],
+                                         height=data["height"],
+                                         image=data["image"],
+                                         length=data["length"],
+                                         liner_type=data["liner_type"],
+                                         name=data["name"],
+                                         price=data["price"],
+                                         width=data["width"],
+                                         )
         print(shoebox)
         return redirect("box-list")
+
 
 class ShoeboxDeleteView(DeleteView):
     model = Shoebox
@@ -160,6 +161,14 @@ def vote(request, commentid: str, up_or_down: str):
         return redirect('box-detail', bpk=comment.shoebox_id)
     print("user voted")
     comment.vote(voter, up_or_down)
+    return redirect('box-detail', bpk=comment.shoebox_id)
+
+
+def comment_report(request, commentid: str):
+    comment = Comment.objects.get(id=int(commentid))
+    messages.info(request, 'You reported a comment!')
+    comment.inappropriate = True
+    comment.save()
     return redirect('box-detail', bpk=comment.shoebox_id)
 
 
@@ -213,7 +222,7 @@ def box_search(request):
             newarr = []
             for box in boxes_found:
                 rating = box.get_box_rating()
-                if(rating >= float(search_stars)):
+                if (rating >= float(search_stars)):
                     newarr.append(box)
 
             boxes_found = newarr
