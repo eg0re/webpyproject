@@ -361,12 +361,22 @@ footer {
 .add-form {
     display: flex;
     flex-direction: column;
+    text-align: center;
     width: 70%;
 }
 
 .add-form > input, select {
     height: 3rem;
     padding-left: 1rem;
+}
+
+#id_image {
+    align-self: center;
+}
+
+.add-form button {
+    width: 30%;
+    align-self: center;
 }
 
 .add-form > label {
@@ -512,3 +522,37 @@ footer {
     display: none;
 }
 
+.edit-form {
+    display: flex;
+    width: 70%;
+    flex-direction: column;
+    text-align: center;
+}
+
+.edit-form p {
+    flex-direction: column;
+    text-align: center;
+}
+
+.edit-form > p > input, select {
+    height: 3rem;
+    padding-left: 1rem;
+}
+
+.edit-form > p > label {
+    font-weight: bold;
+}
+
+#image-clear_id {
+    display:none;
+}
+
+label[for="image-clear_id"]
+{
+    display:none;
+}
+
+.button_edit {
+    width: 30% !important;
+    align-self: center;
+}

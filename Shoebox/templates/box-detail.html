@@ -26,6 +26,9 @@
                     </ul>
                 </div>
                 <div>
+                    {% if user.is_staff %}
+                        <a href="../../service/boxedit/{{ specific_shoebox.id }}" class="add-item button btn">EDIT</a>
+                    {% endif %}
                     <a href="../../basket/{{ specific_shoebox.id }}" class="add-item button btn">+</a>
                     <!-- document icon from https://feathericons.com/ 14.07.21 -->
                     <a href="{% url 'pdfdl' specific_shoebox.id %}" class="notice button" title="download pdf"><img src="../../media/misc/file-text.svg" alt="download PDF"> </a>

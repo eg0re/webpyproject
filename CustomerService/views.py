@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.views.generic import ListView, UpdateView
-from .forms import CommentEditForm
-from Shoebox.models import Comment
+from .forms import CommentEditForm, ShoeboxEditForm
+from Shoebox.models import Comment, Shoebox
 from Useradmin.models import MyUser, get_myuser_from_user
 
 
@@ -78,6 +78,61 @@ def comment_edit(request, pk: str):
                    'myuser_get_profile_path': myuser_get_profile_path
                   }
         return render(request, 'comment-service-edit.html', context)
+
+
+def editBox(request, pk: str):
+    box_id = pk
+    box = Shoebox.objects.get(id=box_id)
+    if request.method == 'POST':
+        print('-------------', request.POST)
+        if 'edit' in request.POST:
+            form = ShoeboxEditForm(request.POST)
+            print("__________________________", form.is_valid())
+            if form.is_valid():
+                print(form.cleaned_data)
+                brand = form.cleaned_data['brand']
+                description = form.cleaned_data['description']
+                flute_layers = form.cleaned_data['flute_layers']
+                flute_type = form.cleaned_data['flute_type']
+                height = form.cleaned_data['height']
+                length = form.cleaned_data['length']
+                liner_type = form.cleaned_data['liner_type']
+                name = form.cleaned_data['name']
+                price = form.cleaned_data['price']
+                width = form.cleaned_data['width']
+                ###
+                box.brand = brand
+                box.description = description
+                box.flute_layers = flute_layers
+                box.flute_type = flute_type
+                box.height = height
+                box.length = length
+                box.liner_type = liner_type
+                box.name = name
+                box.price = price
+                box.width = width
+
+                box.save()
+
+        return redirect('box-detail', bpk=box_id)
+
+    else:
+        can_delete = False
+        user = request.user
+        myuser_get_profile_path = None
+        myuser = None
+        if not user.is_anonymous:
+            myuser = get_myuser_from_user(user)
+            can_delete = myuser.is_staff()
+            myuser_get_profile_path = myuser.get_profile_path()
+        form = ShoeboxEditForm(request.POST or None, instance=box)
+        context = {'form': form,
+                   'can_delete': can_delete,
+                   'box': box,
+                   "myuser": myuser,
+                   'myuser_get_profile_path': myuser_get_profile_path
+                  }
+        return render(request, 'box-edit.html', context)
 
 
 class CommentReportView(ListView):

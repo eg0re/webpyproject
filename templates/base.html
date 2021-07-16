@@ -22,7 +22,10 @@
                     <img src="/media/misc/shopping-cart.svg">
                 </a>
                 <div class="header-user-bla">
-                    <a class="btn" href="{% url 'box-create' %}">add box</a>
+                    {% if user.is_staff %}
+                        <a class="btn" href="{% url 'box-create' %}">add box</a>
+                        <a class="btn" href="{% url 'comment-reports' %}">reports</a>
+                    {% endif %}
                     <div class="fc">
                         <p class="header-user-name">{{ user.username }}</p>
                         <a class="header-login-logout" href="{% url 'logout' %}">Logout</a>
