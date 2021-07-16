@@ -20,7 +20,7 @@ def basket(request, **kwargs):
     else:
         usershoppingcart = ShoppingCart.objects.create(myuser=user)
     usershoppingcart = ShoppingCart.objects.get(myuser_id=user.user.id)
-    cartitem = ShoppingCartItem.objects.filter(box=shoebox, shopping_cart_id=usershoppingcart)
+    cartitem = ShoppingCartItem.objects.filter(box=shoebox).get(shopping_cart_id=usershoppingcart)
     if cartitem:
         cartitem.add_quantity()
     else:

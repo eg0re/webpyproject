@@ -43,7 +43,7 @@ class ShoppingCartItem(models.Model):
     shopping_cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
 
     def add_quantity(self):
-        quantity = ShoppingCartItem.objects.get(box=self.box).quantity
+        quantity = ShoppingCartItem.objects.get(box=self.box, shopping_cart_id=self.shopping_cart.id).quantity
         temp = quantity + 1
         self.quantity = temp
         print(quantity)
