@@ -61,7 +61,7 @@ def show_shopping_cart(request):
 
     total = 0
     for item in cart:
-        total += item.box.price
+        total += item.box.price * item.quantity
 
     context = {
         'myuser_get_profile_path': myuser_get_profile_path,
