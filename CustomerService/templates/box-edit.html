@@ -1,0 +1,22 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}Box edit{% endblock %}
+
+{% block logged_in_content %}
+<h2>Box edit</h2>
+    {% if not can_delete %}
+        You are not authorized to edit this box.<br><br>
+    {% endif %}
+
+
+    {% if can_delete %}
+        <b class="author_delete">{{ box.user.user.username }}</b>
+        <span class="author_on">{{ box.timestamp }}</span><br>
+        <form class="login-form edit-form" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn button_edit" type="submit" name="edit">Edit</button>
+        </form>
+    {% endif %}
+{% endblock %}
